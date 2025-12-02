@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="css/common.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* 全局重置：消除默认边距和拉伸 */
+        /* 全局强制不拉伸 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            max-height: 999999px; /* 解决移动端拉伸bug */
         }
 
         body {
@@ -23,40 +24,45 @@
             background-attachment: fixed;
             font-family: "Microsoft YaHei", sans-serif;
             overflow-x: hidden;
-            line-height: 1.5;
+            overflow-y: auto; /* 仅允许垂直滚动，不无限拉伸 */
+            height: 100vh; /* 固定body高度为视口高度 */
         }
 
-        /* 容器：固定宽度，居中，不拉伸 */
+        /* 容器：固定宽度，居中，不超过视口 */
         .container {
-            max-width: 1400px;
+            width: 100%;
+            max-width: 1360px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
-        /* 顶部导航栏 */
+        /* 顶部导航栏：固定高度 */
         .navbar {
             background-color: #fff;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            padding: 15px 0;
-            margin-bottom: 20px;
+            padding: 12px 0;
+            height: 70px; /* 固定高度 */
+            display: flex;
+            align-items: center;
         }
         .navbar-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
         }
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
             color: #1976d2;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             text-decoration: none;
         }
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 25px;
         }
         .nav-link {
             display: flex;
@@ -64,186 +70,203 @@
             gap: 8px;
             color: #555;
             text-decoration: none;
-            transition: color 0.2s;
+            font-size: 0.95rem;
         }
         .nav-link:hover {
             color: #1976d2;
         }
 
-        /* 主内容区：Flex布局，彻底解决拉伸 */
+        /* 主内容区：固定高度，溢出滚动 */
         .stats-main {
             display: flex;
-            gap: 20px;
+            gap: 15px;
+            margin-top: 15px;
+            height: calc(100vh - 100px); /* 固定高度 = 视口高度 - 导航栏高度 - 边距 */
+            overflow: hidden; /* 禁止主容器拉伸 */
         }
 
-        /* 侧边栏：固定宽度和高度，完全不拉伸 */
+        /* 侧边栏：固定尺寸，不拉伸 */
         .sidebar {
-            width: 180px;
+            width: 170px;
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            padding: 20px 15px;
-            height: 400px; /* 固定高度 */
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            padding: 15px 10px;
+            height: 100%; /* 继承主容器高度 */
+            overflow-y: auto; /* 仅侧边栏内容溢出滚动 */
         }
         .sidebar .user-info {
             text-align: center;
-            padding: 10px 0 20px;
+            padding: 5px 0 15px;
             border-bottom: 1px solid #f0f7ff;
+            margin-bottom: 15px;
         }
         .sidebar .user-info img {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
         .sidebar .user-info .name {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: #333;
         }
         .sidebar .user-info .role {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #666;
         }
         .sidebar .menu-item {
-            padding: 12px 10px;
-            margin: 12px 0;
-            border-radius: 8px;
+            padding: 10px 8px;
+            margin: 8px 0;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             color: #555;
-            transition: background 0.2s;
         }
         .sidebar .menu-item.active {
             background: #e3f2fd;
             color: #1976d2;
             font-weight: 500;
         }
-        .sidebar .menu-item:hover {
-            background: #f8f9fa;
-        }
 
-        /* 右侧内容区：Flex列布局，控制高度 */
+        /* 右侧内容区：固定高度，内部滚动 */
         .content-right {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
+            height: 100%; /* 继承主容器高度 */
+            overflow-y: auto; /* 仅右侧内容溢出滚动 */
+            padding-right: 5px;
         }
 
-        /* 顶部横幅 */
+        /* 顶部横幅：固定高度 */
         .top-banner {
             background: #e3f2fd;
             color: #1565c0;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            height: 40px; /* 固定高度 */
         }
 
-        /* 第一行卡片：Flex横向布局 */
+        /* 卡片容器：固定高度，内部布局不拉伸 */
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* 第一行卡片：固定高度 */
         .card-row-1 {
             display: flex;
-            gap: 20px;
+            gap: 15px;
+            height: 160px; /* 固定行高 */
         }
         .card-1-1 {
-            width: 30%;
+            width: 28%;
             background: #bbdefb;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            padding: 20px;
-            height: 180px; /* 固定高度 */
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            padding: 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
         .card-1-2 {
-            width: 70%;
+            width: 72%;
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            padding: 20px;
-            height: 180px; /* 固定高度 */
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            padding: 15px;
         }
 
-        /* 第二行卡片：Flex横向布局 */
+        /* 第二行卡片：固定高度 */
         .card-row-2 {
             display: flex;
-            gap: 20px;
+            gap: 15px;
+            height: 200px; /* 固定行高 */
         }
         .card-2-1 {
             width: 50%;
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            padding: 20px;
-            height: 220px; /* 固定高度 */
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            padding: 15px;
         }
         .card-2-2 {
             width: 50%;
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            padding: 20px;
-            height: 220px; /* 固定高度 */
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            padding: 15px;
             display: flex;
             justify-content: space-around;
             align-items: center;
         }
 
-        /* 第三行卡片：全屏宽度 */
+        /* 第三行卡片：固定高度 */
         .card-row-3 {
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            padding: 20px;
-            height: 240px; /* 固定高度 */
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            padding: 15px;
+            height: 220px; /* 固定行高 */
         }
 
-        /* 卡片标题通用样式 */
+        /* 卡片标题：固定样式 */
         .card-title {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #666;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            height: 20px; /* 固定高度，避免换行拉伸 */
         }
 
-        /* 学生总数卡片 */
+        /* 学生总数：固定字体大小 */
         .amount {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             font-weight: 700;
             color: #212121;
+            line-height: 1.2;
         }
 
-        /* 趋势图表容器：绝对固定大小 */
+        /* 图表容器：绝对固定尺寸，禁止拉伸 */
         .chart-box {
             width: 100%;
-            height: 120px;
-            position: relative;
+            height: 100px; /* 绝对固定高度 */
         }
-        #trendChart {
+        #trendChart, #malePie, #femalePie {
             width: 100% !important;
             height: 100% !important;
+            min-height: 0 !important; /* 禁用Chart.js最小高度 */
         }
 
-        /* 图表导航 */
+        /* 图表导航：固定样式 */
         .chart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            height: 25px; /* 固定高度 */
+        }
+        .chart-nav {
+            display: flex;
+            gap: 5px;
         }
         .chart-nav span {
-            padding: 5px 10px;
+            padding: 3px 8px;
             border-radius: 4px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
             color: #666;
-            margin-left: 5px;
+            white-space: nowrap;
         }
         .chart-nav span.active {
             background: #bbdefb;
@@ -251,16 +274,17 @@
             font-weight: 500;
         }
 
-        /* 班级新增人数列表 */
+        /* 班级新增列表：固定高度，溢出滚动 */
         .income-list {
-            height: 160px;
-            overflow-y: auto; /* 超出滚动，不拉伸 */
+            height: 145px; /* 固定高度 */
+            overflow-y: auto;
+            padding-right: 5px;
         }
         .income-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 0;
+            padding: 8px 0;
             border-bottom: 1px solid #f0f7ff;
         }
         .income-item:last-child {
@@ -269,57 +293,57 @@
         .income-item .item-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .income-item .item-info img {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
         }
         .income-item .info-text .name {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             color: #333;
         }
         .income-item .info-text .time {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #666;
         }
         .income-item .amount {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #2e7d32;
             font-weight: 500;
         }
 
-        /* 饼图容器：固定大小 */
-        .pie-box {
-            width: 100px;
-            height: 100px;
+        /* 饼图组：固定尺寸 */
+        .pie-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        #malePie, #femalePie {
-            width: 100% !important;
-            height: 100% !important;
+        .pie-box {
+            width: 90px;
+            height: 90px; /* 绝对固定尺寸 */
         }
         .pie-info {
             text-align: center;
-        }
-        .pie-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #333;
             margin-top: 5px;
         }
+        .pie-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+        }
         .pie-label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #666;
         }
         .pie-trend {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            margin-top: 3px;
+            gap: 3px;
         }
         .pie-trend.up {
             color: #2e7d32;
@@ -328,39 +352,39 @@
             color: #c62828;
         }
 
-        /* 年级分布 */
+        /* 年级分布：固定高度布局 */
         .grade-list {
             display: flex;
             justify-content: space-around;
             align-items: center;
-            height: 180px;
+            height: 160px; /* 固定高度 */
         }
         .grade-item {
             text-align: center;
-            width: 120px;
+            width: 100px;
         }
         .grade-item img {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            margin-bottom: 10px;
-        }
-        .grade-item .code {
-            font-size: 0.85rem;
-            color: #1565c0;
-            background: #e3f2fd;
-            padding: 3px 8px;
-            border-radius: 4px;
-            display: inline-block;
             margin-bottom: 8px;
         }
+        .grade-item .code {
+            font-size: 0.8rem;
+            color: #1565c0;
+            background: #e3f2fd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
         .grade-item .name {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: #333;
-            margin-bottom: 6px;
+            margin-bottom: 3px;
         }
         .grade-item .change {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 500;
         }
         .change.up {
@@ -371,38 +395,52 @@
         }
         .view-all {
             text-align: right;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #1565c0;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 5px;
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 4px;
+            gap: 3px;
         }
 
-        /* 响应式适配：小屏幕堆叠 */
+        /* 禁用滚动条样式（可选，更美观） */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1e7fe;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* 响应式适配：小屏幕强制堆叠，仍固定高度 */
         @media (max-width: 992px) {
             .stats-main {
                 flex-direction: column;
+                height: calc(100vh - 80px);
             }
             .sidebar {
                 width: 100%;
-                height: auto;
+                height: 180px; /* 固定侧边栏高度 */
             }
             .card-row-1, .card-row-2 {
                 flex-direction: column;
+                height: auto; /* 小屏幕取消行高固定 */
             }
             .card-1-1, .card-1-2, .card-2-1, .card-2-2 {
                 width: 100%;
-                height: auto;
-                min-height: 150px;
+                height: 150px; /* 小屏幕卡片固定高度 */
             }
             .grade-list {
                 flex-wrap: wrap;
                 height: auto;
-                gap: 20px;
-                padding: 20px 0;
+                gap: 15px;
+                padding: 10px 0;
             }
         }
     </style>
@@ -464,128 +502,131 @@
                 当前统计周期：2025学年第一学期
             </div>
 
-            <!-- 第一行卡片：学生总数 + 趋势图 -->
-            <div class="card-row-1">
-                <div class="card-1-1">
-                    <div class="card-title">在校学生总数</div>
-                    <div class="amount">1248</div>
-                </div>
-                <div class="card-1-2">
-                    <div class="chart-header">
-                        <div class="card-title">学期人数趋势</div>
-                        <div class="chart-nav">
-                            <span>Jan</span>
-                            <span>Feb</span>
-                            <span>Mar</span>
-                            <span>Apr</span>
-                            <span class="active">May</span>
-                            <span>Jun</span>
-                            <span>Jul</span>
+            <!-- 卡片容器 -->
+            <div class="card-container">
+                <!-- 第一行卡片：学生总数 + 趋势图 -->
+                <div class="card-row-1">
+                    <div class="card-1-1">
+                        <div class="card-title">在校学生总数</div>
+                        <div class="amount">1248</div>
+                    </div>
+                    <div class="card-1-2">
+                        <div class="chart-header">
+                            <div class="card-title">学期人数趋势</div>
+                            <div class="chart-nav">
+                                <span>Jan</span>
+                                <span>Feb</span>
+                                <span>Mar</span>
+                                <span>Apr</span>
+                                <span class="active">May</span>
+                                <span>Jun</span>
+                                <span>Jul</span>
+                            </div>
+                        </div>
+                        <div class="chart-box">
+                            <canvas id="trendChart"></canvas>
                         </div>
                     </div>
-                    <div class="chart-box">
-                        <canvas id="trendChart"></canvas>
-                    </div>
                 </div>
-            </div>
 
-            <!-- 第二行卡片：班级新增 + 性别占比 -->
-            <div class="card-row-2">
-                <div class="card-2-1">
-                    <div class="card-title">班级新增人数</div>
-                    <div class="income-list">
-                        <div class="income-item">
-                            <div class="item-info">
-                                <img src="images/man.png" alt="1班">
-                                <div class="info-text">
-                                    <div class="name">1班</div>
-                                    <div class="time">1周前</div>
+                <!-- 第二行卡片：班级新增 + 性别占比 -->
+                <div class="card-row-2">
+                    <div class="card-2-1">
+                        <div class="card-title">班级新增人数</div>
+                        <div class="income-list">
+                            <div class="income-item">
+                                <div class="item-info">
+                                    <img src="images/man.png" alt="1班">
+                                    <div class="info-text">
+                                        <div class="name">1班</div>
+                                        <div class="time">1周前</div>
+                                    </div>
                                 </div>
+                                <div class="amount">+12</div>
                             </div>
-                            <div class="amount">+12</div>
+                            <div class="income-item">
+                                <div class="item-info">
+                                    <img src="images/woman.png" alt="2班">
+                                    <div class="info-text">
+                                        <div class="name">2班</div>
+                                        <div class="time">4天前</div>
+                                    </div>
+                                </div>
+                                <div class="amount">+8</div>
+                            </div>
+                            <div class="income-item">
+                                <div class="item-info">
+                                    <img src="images/rabbit.png" alt="3班">
+                                    <div class="info-text">
+                                        <div class="name">3班</div>
+                                        <div class="time">2分钟前</div>
+                                    </div>
+                                </div>
+                                <div class="amount">+5</div>
+                            </div>
                         </div>
-                        <div class="income-item">
-                            <div class="item-info">
-                                <img src="images/woman.png" alt="2班">
-                                <div class="info-text">
-                                    <div class="name">2班</div>
-                                    <div class="time">4天前</div>
+                    </div>
+                    <div class="card-2-2">
+                        <div class="pie-group">
+                            <div class="pie-box">
+                                <canvas id="malePie"></canvas>
+                            </div>
+                            <div class="pie-info">
+                                <div class="pie-value">58%</div>
+                                <div class="pie-label">男生占比</div>
+                                <div class="pie-trend up">
+                                    <i class="fas fa-arrow-up"></i> 2.3%
                                 </div>
                             </div>
-                            <div class="amount">+8</div>
                         </div>
-                        <div class="income-item">
-                            <div class="item-info">
-                                <img src="images/rabbit.png" alt="3班">
-                                <div class="info-text">
-                                    <div class="name">3班</div>
-                                    <div class="time">2分钟前</div>
+                        <div class="pie-group">
+                            <div class="pie-box">
+                                <canvas id="femalePie"></canvas>
+                            </div>
+                            <div class="pie-info">
+                                <div class="pie-value">42%</div>
+                                <div class="pie-label">女生占比</div>
+                                <div class="pie-trend down">
+                                    <i class="fas fa-arrow-down"></i> 1.1%
                                 </div>
                             </div>
-                            <div class="amount">+5</div>
                         </div>
                     </div>
                 </div>
-                <div class="card-2-2">
-                    <div class="pie-group">
-                        <div class="pie-box">
-                            <canvas id="malePie"></canvas>
-                        </div>
-                        <div class="pie-info">
-                            <div class="pie-value">58%</div>
-                            <div class="pie-label">男生占比</div>
-                            <div class="pie-trend up">
-                                <i class="fas fa-arrow-up"></i> 2.3%
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pie-group">
-                        <div class="pie-box">
-                            <canvas id="femalePie"></canvas>
-                        </div>
-                        <div class="pie-info">
-                            <div class="pie-value">42%</div>
-                            <div class="pie-label">女生占比</div>
-                            <div class="pie-trend down">
-                                <i class="fas fa-arrow-down"></i> 1.1%
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- 第三行卡片：年级分布 -->
-            <div class="card-row-3">
-                <div class="card-title">年级分布</div>
-                <div class="grade-list">
-                    <div class="grade-item">
-                        <img src="images/man.png" alt="高一">
-                        <div class="code">高一</div>
-                        <div class="name">高一年级</div>
-                        <div class="change up">+42%</div>
+                <!-- 第三行卡片：年级分布 -->
+                <div class="card-row-3">
+                    <div class="card-title">年级分布</div>
+                    <div class="grade-list">
+                        <div class="grade-item">
+                            <img src="images/man.png" alt="高一">
+                            <div class="code">高一</div>
+                            <div class="name">高一年级</div>
+                            <div class="change up">+42%</div>
+                        </div>
+                        <div class="grade-item">
+                            <img src="images/woman.png" alt="高二">
+                            <div class="code">高二</div>
+                            <div class="name">高二年级</div>
+                            <div class="change up">+35%</div>
+                        </div>
+                        <div class="grade-item">
+                            <img src="images/fox.png" alt="高三">
+                            <div class="code">高三</div>
+                            <div class="name">高三年级</div>
+                            <div class="change down">-23%</div>
+                        </div>
+                        <div class="grade-item">
+                            <img src="images/rabbit.png" alt="复读班">
+                            <div class="code">复读</div>
+                            <div class="name">复读班级</div>
+                            <div class="change up">+18%</div>
+                        </div>
                     </div>
-                    <div class="grade-item">
-                        <img src="images/woman.png" alt="高二">
-                        <div class="code">高二</div>
-                        <div class="name">高二年级</div>
-                        <div class="change up">+35%</div>
+                    <div class="view-all">
+                        <span>查看全部</span>
+                        <i class="fas fa-angle-right"></i>
                     </div>
-                    <div class="grade-item">
-                        <img src="images/fox.png" alt="高三">
-                        <div class="code">高三</div>
-                        <div class="name">高三年级</div>
-                        <div class="change down">-23%</div>
-                    </div>
-                    <div class="grade-item">
-                        <img src="images/rabbit.png" alt="复读班">
-                        <div class="code">复读</div>
-                        <div class="name">复读班级</div>
-                        <div class="change up">+18%</div>
-                    </div>
-                </div>
-                <div class="view-all">
-                    <span>查看全部</span>
-                    <i class="fas fa-angle-right"></i>
                 </div>
             </div>
         </div>
@@ -593,9 +634,9 @@
 </div>
 
 <script>
-    // DOM加载完成后初始化图表，避免找不到元素
+    // 图表初始化：禁用所有可能导致拉伸的配置
     document.addEventListener('DOMContentLoaded', function() {
-        // 1. 学期人数趋势曲线
+        // 1. 学期人数趋势曲线（完全固定尺寸）
         const trendCtx = document.getElementById('trendChart').getContext('2d');
         new Chart(trendCtx, {
             type: 'line',
@@ -609,22 +650,23 @@
                     borderWidth: 2,
                     tension: 0.4,
                     fill: true,
-                    pointRadius: 0 // 隐藏数据点，更简洁
+                    pointRadius: 0
                 }]
             },
             options: {
-                responsive: true,
+                responsive: false, // 禁用自适应（关键！）
                 maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
                 scales: {
                     y: { display: false },
                     x: { display: false }
                 },
-                animation: { duration: 800, easing: 'easeOutQuart' }
+                animation: { duration: 500 },
+                layout: { padding: 0 } // 禁用内边距
             }
         });
 
-        // 2. 男生占比饼图
+        // 2. 男生占比饼图（完全固定尺寸）
         const maleCtx = document.getElementById('malePie').getContext('2d');
         new Chart(maleCtx, {
             type: 'doughnut',
@@ -636,18 +678,15 @@
                 }]
             },
             options: {
-                responsive: true,
+                responsive: false, // 禁用自适应（关键！）
                 maintainAspectRatio: false,
                 cutout: '80%',
-                animation: {
-                    animateRotate: true,
-                    animateScale: true,
-                    duration: 800
-                }
+                animation: { duration: 500 },
+                layout: { padding: 0 }
             }
         });
 
-        // 3. 女生占比饼图
+        // 3. 女生占比饼图（完全固定尺寸）
         const femaleCtx = document.getElementById('femalePie').getContext('2d');
         new Chart(femaleCtx, {
             type: 'doughnut',
@@ -659,14 +698,11 @@
                 }]
             },
             options: {
-                responsive: true,
+                responsive: false, // 禁用自适应（关键！）
                 maintainAspectRatio: false,
                 cutout: '80%',
-                animation: {
-                    animateRotate: true,
-                    animateScale: true,
-                    duration: 800
-                }
+                animation: { duration: 500 },
+                layout: { padding: 0 }
             }
         });
     });
