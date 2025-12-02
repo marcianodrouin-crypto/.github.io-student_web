@@ -7,215 +7,289 @@
     <!-- 保留原图标库，样式引用改为 GitHub Pages 路径 -->
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/common.css"> <!-- 适配 GitHub Pages 路径 -->
+    <style>
+        /* 核心优化：确保文字横向排布，不叠放 */
+        .table {
+            table-layout: fixed; /* 固定表格布局，避免列宽错乱 */
+            width: 100%;
+        }
+        .table th,
+        .table td {
+            white-space: nowrap; /* 强制文字不换行 */
+            overflow: hidden; /* 超出部分隐藏（避免撑破表格） */
+            text-overflow: ellipsis; /* 超出部分显示省略号 */
+            padding: 14px 12px; /* 调整内边距，横向紧凑 */
+        }
+        /* 为关键列设置最小宽度，确保横向排布 */
+        .table th:nth-child(4), /* 学号列 */
+        .table td:nth-child(4) {
+            min-width: 100px; /* 学号列最小宽度，保证一行显示 */
+        }
+        .table th:nth-child(3), /* 姓名列 */
+        .table td:nth-child(3) {
+            min-width: 80px;
+        }
+        .table th:nth-child(5), /* 班级列 */
+        .table td:nth-child(5) {
+            min-width: 80px;
+        }
+        /* 操作列最小宽度，确保按钮横向排布 */
+        .table th:last-child,
+        .table td:last-child {
+            min-width: 180px;
+            text-align: center;
+        }
+        /* 操作按钮横向排布，无换行 */
+        .operate-btn {
+            margin: 0 3px; /* 按钮间距，横向紧凑 */
+            display: inline-block; /* 确保按钮横向排列 */
+        }
+        /* 搜索栏优化：确保输入框横向排布，不叠放 */
+        .search-group {
+            flex: 1;
+            min-width: 200px; /* 缩小最小宽度，适配更多屏幕 */
+        }
+        .form-control,
+        .search-select {
+            width: 100%;
+            min-width: 120px;
+        }
+        /* 功能按钮区横向排布 */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap; /* 移动端自动换行，避免溢出 */
+        }
+        /* 修复移动端显示：确保小屏也尽量横向排布 */
+        @media (max-width: 768px) {
+            .table th.hide-on-mobile,
+            .table td.hide-on-mobile {
+                display: none; /* 移动端隐藏次要列，保证关键列横向显示 */
+            }
+            .table th:nth-child(4),
+            .table td:nth-child(4) {
+                min-width: 80px; /* 移动端缩小学号列最小宽度 */
+            }
+            .table th:last-child,
+            .table td:last-child {
+                min-width: 150px;
+            }
+        }
+        /* 修复班级图标错误（原fas fa-class不存在） */
+        .form-label .fa-users-class {
+            color: #4A90E2;
+        }
+    </style>
 </head>
 <body>
-    <!-- 导航栏：保留原结构和样式 -->
-    <nav class="navbar">
-        <div class="navbar-container container">
-            <a href="index.html" class="logo"> <!-- 首页链接改为相对路径 -->
-                <i class="fas fa-graduation-cap"></i>
-                爱鲲学院学生管理系统
+<!-- 导航栏：保留原结构和样式 -->
+<nav class="navbar">
+    <div class="navbar-container container">
+        <a href="index.html" class="logo"> <!-- 首页链接改为相对路径 -->
+            <i class="fas fa-graduation-cap"></i>
+            爱鲲学院学生管理系统
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home"></i> 首页
             </a>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">
-                    <i class="fas fa-home"></i> 首页
-                </a>
-                <a href="student.html" class="nav-link">
-                    <i class="fas fa-user-graduate"></i> 学生管理
-                </a>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-chart-bar"></i> 数据统计
-                </a>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-cog"></i> 系统设置
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- 主要内容区：保留所有功能模块（查询栏、功能按钮、表格、分页） -->
-    <div class="container">
-        <!-- 搜索栏：保留原查询功能（姓名、学号、班级） -->
-        <div class="search-bar">
-            <div class="search-group">
-                <label for="name" class="form-label">
-                    <i class="fas fa-user"></i> 学生姓名
-                </label>
-                <input type="text" id="name" class="form-control" placeholder="请输入姓名">
-            </div>
-            <div class="search-group">
-                <label for="studentId" class="form-label">
-                    <i class="fas fa-id-card"></i> 学号
-                </label>
-                <input type="text" id="studentId" class="form-control" placeholder="请输入学号">
-            </div>
-            <div class="search-group">
-                <label for="class" class="form-label">
-                    <i class="fas fa-class"></i> 班级
-                </label>
-                <select id="class" class="search-select">
-                    <option value="">全部班级</option>
-                    <option value="1班">1班</option>
-                    <option value="2班">2班</option>
-                    <option value="3班">3班</option>
-                </select>
-            </div>
-            <button class="btn btn-primary search-btn">
-                <i class="fas fa-search"></i> 搜索
-            </button>
-            <button class="btn btn-secondary">
-                <i class="fas fa-redo"></i> 重置
-            </button>
-        </div>
-
-        <!-- 功能按钮区：保留原功能（新增、编辑、删除、导出） -->
-        <div class="btn-group">
-            <button class="btn btn-primary" id="addStudent">
-                <i class="fas fa-plus"></i> 新增学生
-            </button>
-            <button class="btn btn-secondary" id="editStudent">
-                <i class="fas fa-edit"></i> 编辑信息
-            </button>
-            <button class="btn btn-danger" id="deleteStudent">
-                <i class="fas fa-trash"></i> 删除学生
-            </button>
-            <button class="btn btn-secondary" id="exportData">
-                <i class="fas fa-download"></i> 导出数据
-            </button>
-        </div>
-
-        <!-- 学生表格：保留原结构（序号、头像、姓名、学号、班级、性别、年龄、操作），适配样式 -->
-        <div class="card">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="hide-on-mobile">序号</th>
-                        <th>头像</th>
-                        <th>学生姓名</th>
-                        <th>学号</th>
-                        <th class="hide-on-mobile">班级</th>
-                        <th>性别</th>
-                        <th class="hide-on-mobile">年龄</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 表格数据：保留原结构，图片用CDN确保显示 -->
-                    <tr>
-                        <td class="hide-on-mobile">1</td>
-                        <td><img src="https://cdn.staticaly.com/gh/liyupi/pic-lib/blob/main/img/cartoon-student-1.png" alt="学生头像" class="student-avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
-                        <td>张三</td>
-                        <td>2025001</td>
-                        <td class="hide-on-mobile">1班</td>
-                        <td>男</td>
-                        <td class="hide-on-mobile">18</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025001')">查看</button>
-                            <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025001')">编辑</button>
-                            <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025001')">删除</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="hide-on-mobile">2</td>
-                        <td><img src="https://cdn.staticaly.com/gh/liyupi/pic-lib/blob/main/img/cartoon-student-2.png" alt="学生头像" class="student-avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
-                        <td>李四</td>
-                        <td>2025002</td>
-                        <td class="hide-on-mobile">2班</td>
-                        <td>女</td>
-                        <td class="hide-on-mobile">17</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025002')">查看</button>
-                            <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025002')">编辑</button>
-                            <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025002')">删除</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="hide-on-mobile">3</td>
-                        <td><img src="https://cdn.staticaly.com/gh/liyupi/pic-lib/blob/main/img/cartoon-animal-rabbit.png" alt="学生头像" class="student-avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
-                        <td>王五</td>
-                        <td>2025003</td>
-                        <td class="hide-on-mobile">3班</td>
-                        <td>男</td>
-                        <td class="hide-on-mobile">18</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025003')">查看</button>
-                            <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025003')">编辑</button>
-                            <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025003')">删除</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="hide-on-mobile">4</td>
-                        <td><img src="https://cdn.staticaly.com/gh/liyupi/pic-lib/blob/main/img/cartoon-animal-fox.png" alt="学生头像" class="student-avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
-                        <td>赵六</td>
-                        <td>2025004</td>
-                        <td class="hide-on-mobile">1班</td>
-                        <td>女</td>
-                        <td class="hide-on-mobile">18</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025004')">查看</button>
-                            <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025004')">编辑</button>
-                            <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025004')">删除</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- 分页：保留原结构 -->
-        <div class="pagination">
-            <button class="btn btn-sm btn-secondary page-btn">上一页</button>
-            <button class="btn btn-sm btn-primary page-btn active">1</button>
-            <button class="btn btn-sm btn-secondary page-btn">2</button>
-            <button class="btn btn-sm btn-secondary page-btn">3</button>
-            <button class="btn btn-sm btn-secondary page-btn">下一页</button>
+            <a href="student.html" class="nav-link">
+                <i class="fas fa-user-graduate"></i> 学生管理
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-chart-bar"></i> 数据统计
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-cog"></i> 系统设置
+            </a>
         </div>
     </div>
+</nav>
 
-    <!-- 保留原功能脚本（后续对接后端用） -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script>
-        // 新增学生（后续对接后端接口）
-        document.getElementById('addStudent').addEventListener('click', function() {
-            // 跳转新增页面或打开弹窗，保留原逻辑
-            alert('打开新增学生页面（后续对接后端）');
-            // window.location.href = 'add-student.html';
-        });
+<!-- 主要内容区：保留所有功能模块（查询栏、功能按钮、表格、分页） -->
+<div class="container">
+    <!-- 搜索栏：保留原查询功能（姓名、学号、班级），修复班级图标 -->
+    <div class="search-bar">
+        <div class="search-group">
+            <label for="name" class="form-label">
+                <i class="fas fa-user"></i> 学生姓名
+            </label>
+            <input type="text" id="name" class="form-control" placeholder="请输入姓名">
+        </div>
+        <div class="search-group">
+            <label for="studentId" class="form-label">
+                <i class="fas fa-id-card"></i> 学号
+            </label>
+            <input type="text" id="studentId" class="form-control" placeholder="请输入学号">
+        </div>
+        <div class="search-group">
+            <label for="class" class="form-label">
+                <i class="fas fa-users-class"></i> 班级 <!-- 修复为存在的图标 -->
+            </label>
+            <select id="class" class="search-select">
+                <option value="">全部班级</option>
+                <option value="1班">1班</option>
+                <option value="2班">2班</option>
+                <option value="3班">3班</option>
+            </select>
+        </div>
+        <button class="btn btn-primary search-btn">
+            <i class="fas fa-search"></i> 搜索
+        </button>
+        <button class="btn btn-secondary">
+            <i class="fas fa-redo"></i> 重置
+        </button>
+    </div>
 
-        // 编辑学生（后续对接后端接口）
-        document.getElementById('editStudent').addEventListener('click', function() {
-            alert('请先选择要编辑的学生（后续对接后端）');
-        });
+    <!-- 功能按钮区：保留原功能（新增、编辑、删除、导出） -->
+    <div class="btn-group">
+        <button class="btn btn-primary" id="addStudent">
+            <i class="fas fa-plus"></i> 新增学生
+        </button>
+        <button class="btn btn-secondary" id="editStudent">
+            <i class="fas fa-edit"></i> 编辑信息
+        </button>
+        <button class="btn btn-danger" id="deleteStudent">
+            <i class="fas fa-trash"></i> 删除学生
+        </button>
+        <button class="btn btn-secondary" id="exportData">
+            <i class="fas fa-download"></i> 导出数据
+        </button>
+    </div>
 
-        // 删除学生（后续对接后端接口）
-        document.getElementById('deleteStudent').addEventListener('click', function() {
-            if(confirm('确定要删除选中的学生吗？')) {
-                alert('删除成功（后续对接后端）');
-            }
-        });
+    <!-- 学生表格：保留原结构，替换为本地素材图片，优化文字横向排布 -->
+    <div class="card">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="hide-on-mobile">序号</th>
+                <th>头像</th>
+                <th>学生姓名</th>
+                <th>学号</th>
+                <th class="hide-on-mobile">班级</th>
+                <th>性别</th>
+                <th class="hide-on-mobile">年龄</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 表格数据：替换为本地素材图片，文字横向一行显示 -->
+            <tr>
+                <td class="hide-on-mobile">1</td>
+                <td><img src="images/man.png" alt="学生头像" class="student-avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
+                <td>张三</td>
+                <td>2025001</td>
+                <td class="hide-on-mobile">1班</td>
+                <td>男</td>
+                <td class="hide-on-mobile">18</td>
+                <td>
+                    <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025001')">查看</button>
+                    <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025001')">编辑</button>
+                    <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025001')">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="hide-on-mobile">2</td>
+                <td><img src="images/woman.png" alt="学生头像" class="student-avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
+                <td>李四</td>
+                <td>2025002</td>
+                <td class="hide-on-mobile">2班</td>
+                <td>女</td>
+                <td class="hide-on-mobile">17</td>
+                <td>
+                    <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025002')">查看</button>
+                    <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025002')">编辑</button>
+                    <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025002')">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="hide-on-mobile">3</td>
+                <td><img src="images/rabbit.png" alt="学生头像" class="student-avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
+                <td>王五</td>
+                <td>2025003</td>
+                <td class="hide-on-mobile">3班</td>
+                <td>男</td>
+                <td class="hide-on-mobile">18</td>
+                <td>
+                    <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025003')">查看</button>
+                    <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025003')">编辑</button>
+                    <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025003')">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="hide-on-mobile">4</td>
+                <td><img src="images/fox.png" alt="学生头像" class="student-avatar" style="width: 40px; height: 40px; border-radius: 50%;"></td>
+                <td>赵六</td>
+                <td>2025004</td>
+                <td class="hide-on-mobile">1班</td>
+                <td>女</td>
+                <td class="hide-on-mobile">18</td>
+                <td>
+                    <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025004')">查看</button>
+                    <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025004')">编辑</button>
+                    <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025004')">删除</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-        // 导出数据（后续对接后端接口）
-        document.getElementById('exportData').addEventListener('click', function() {
-            alert('导出数据成功（后续对接后端）');
-        });
+    <!-- 分页：保留原结构，优化横向排布 -->
+    <div class="pagination" style="display: flex; gap: 8px; justify-content: center; margin-top: 20px;">
+        <button class="btn btn-sm btn-secondary page-btn">上一页</button>
+        <button class="btn btn-sm btn-primary page-btn active">1</button>
+        <button class="btn btn-sm btn-secondary page-btn">2</button>
+        <button class="btn btn-sm btn-secondary page-btn">3</button>
+        <button class="btn btn-sm btn-secondary page-btn">下一页</button>
+    </div>
+</div>
 
-        // 查看详情（后续对接后端接口）
-        function toDetail(studentId) {
-            alert(`查看学号${studentId}的学生详情（后续对接后端）`);
-            // window.location.href = `student-detail.html?id=${studentId}`;
+<!-- 保留原功能脚本（后续对接后端用） -->
+<script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+<script>
+    // 新增学生（后续对接后端接口）
+    document.getElementById('addStudent').addEventListener('click', function() {
+        // 跳转新增页面或打开弹窗，保留原逻辑
+        alert('打开新增学生页面（后续对接后端）');
+        // window.location.href = 'add-student.html';
+    });
+
+    // 编辑学生（后续对接后端接口）
+    document.getElementById('editStudent').addEventListener('click', function() {
+        alert('请先选择要编辑的学生（后续对接后端）');
+    });
+
+    // 删除学生（后续对接后端接口）
+    document.getElementById('deleteStudent').addEventListener('click', function() {
+        if(confirm('确定要删除选中的学生吗？')) {
+            alert('删除成功（后续对接后端）');
         }
+    });
 
-        // 编辑详情（后续对接后端接口）
-        function toEdit(studentId) {
-            alert(`编辑学号${studentId}的学生信息（后续对接后端）`);
-            // window.location.href = `edit-student.html?id=${studentId}`;
-        }
+    // 导出数据（后续对接后端接口）
+    document.getElementById('exportData').addEventListener('click', function() {
+        alert('导出数据成功（后续对接后端）');
+    });
 
-        // 删除详情（后续对接后端接口）
-        function toDelete(studentId) {
-            if(confirm(`确定要删除学号${studentId}的学生吗？`)) {
-                alert(`删除学号${studentId}的学生成功（后续对接后端）`);
-            }
+    // 查看详情（后续对接后端接口）
+    function toDetail(studentId) {
+        alert(`查看学号${studentId}的学生详情（后续对接后端）`);
+        // window.location.href = `student-detail.html?id=${studentId}`;
+    }
+
+    // 编辑详情（后续对接后端接口）
+    function toEdit(studentId) {
+        alert(`编辑学号${studentId}的学生信息（后续对接后端）`);
+        // window.location.href = `edit-student.html?id=${studentId}`;
+    }
+
+    // 删除详情（后续对接后端接口）
+    function toDelete(studentId) {
+        if(confirm(`确定要删除学号${studentId}的学生吗？`)) {
+            alert(`删除学号${studentId}的学生成功（后续对接后端）`);
         }
-    </script>
+    }
+</script>
 </body>
 </html>
