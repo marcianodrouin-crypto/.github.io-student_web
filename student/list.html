@@ -2,15 +2,110 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 自适应 viewport：禁止手动缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>学生列表 - 爱鲲学院学生管理系统</title>
-    <!-- 引入公共样式（相对路径，适配GitHub Pages） -->
     <link rel="stylesheet" href="../css/common.css">
-    <!-- 引入Font Awesome图标库 -->
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 表格移动端适配：横向滚动 */
+        .table-container {
+            overflow-x: auto; /* 表格超出宽度时横向滚动 */
+            margin-top: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(74, 144, 226, 0.05);
+        }
+
+        /* 查询栏移动端适配 */
+        .search-bar {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start; /* 移动端垂直排列时顶对齐 */
+            margin-bottom: 20px;
+            flex-direction: column; /* 移动端默认垂直排列 */
+        }
+
+        .search-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex: 1;
+            min-width: 100%; /* 移动端占满宽度 */
+        }
+
+        .search-select {
+            padding: 10px 12px;
+            font-size: 0.9rem;
+            width: 110px; /* 移动端缩小下拉框宽度 */
+        }
+
+        /* 按钮移动端适配 */
+        .btn {
+            padding: 8px 14px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            margin-bottom: 15px;
+            width: 100%; /* 新增按钮移动端占满宽度 */
+        }
+
+        /* 卡片移动端适配 */
+        .card {
+            padding: 20px 15px; /* 移动端减少内边距 */
+            margin-top: 25px;
+        }
+
+        h2 {
+            font-size: 1.6rem !important; /* 移动端缩小标题 */
+        }
+
+        /* 表格文字移动端适配 */
+        .table th,
+        .table td {
+            padding: 12px 10px; /* 移动端减少内边距 */
+            font-size: 0.9rem; /* 移动端缩小字体 */
+        }
+
+        .table th i,
+        .table td i {
+            font-size: 0.85rem;
+            margin-right: 3px !important;
+        }
+
+        /* 空状态移动端适配 */
+        .empty-state {
+            padding: 30px 15px;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        /* 响应式调整（平板横向排列） */
+        @media (min-width: 768px) {
+            .search-bar {
+                flex-direction: row; /* 平板及以上横向排列 */
+                align-items: center;
+            }
+
+            .search-group {
+                min-width: 250px;
+            }
+
+            .btn-primary {
+                width: auto; /* 平板及以上恢复默认宽度 */
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- 导航栏 -->
     <nav class="navbar">
         <div class="container navbar-container">
             <a href="../index.html" class="logo">
@@ -31,14 +126,12 @@
         </div>
     </nav>
 
-    <!-- 主内容区 -->
     <div class="container">
         <div class="card decorator">
-            <h2 style="margin-bottom: 30px; font-size: 1.9rem; font-weight: 700; color: #333; display: flex; align-items: center; gap: 10px;">
+            <h2 style="margin-bottom: 20px; font-size: 1.9rem; font-weight: 700; color: #333; display: flex; align-items: center; gap: 10px;">
                 <i class="fas fa-users" style="color: #4A90E2;"></i> 学生列表
             </h2>
 
-            <!-- 消息提示 -->
             <div class="alert alert-success" style="display: none;">
                 <i class="fas fa-check-circle"></i>
                 <span>操作成功！</span>
@@ -48,9 +141,7 @@
                 <span>操作失败！</span>
             </div>
 
-            <!-- 查询功能区 -->
             <div class="search-bar">
-                <!-- 学号精准查询 -->
                 <div class="search-group">
                     <input type="text" class="form-control" placeholder="输入学号精准查询" style="flex: 1;">
                     <button class="btn btn-secondary">
@@ -58,9 +149,8 @@
                     </button>
                 </div>
 
-                <!-- 姓名查询（模糊/精准） -->
                 <div class="search-group">
-                    <select class="search-select" style="width: 130px;">
+                    <select class="search-select">
                         <option value="like">模糊查询</option>
                         <option value="eq">精准查询</option>
                     </select>
@@ -70,43 +160,43 @@
                     </button>
                 </div>
 
-                <!-- 重置按钮 -->
-                <button class="btn btn-secondary">
+                <button class="btn btn-secondary" style="width: 100%;">
                     <i class="fas fa-sync-alt"></i> 重置
                 </button>
             </div>
 
-            <!-- 添加学生按钮 -->
-            <a href="add.html" class="btn btn-primary" style="margin-bottom: 25px;">
+            <a href="add.html" class="btn btn-primary">
                 <i class="fas fa-plus-circle"></i> 新增学生
             </a>
 
-            <!-- 学生表格 -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th><i class="fas fa-hashtag" style="margin-right: 5px;"></i>ID</th>
-                        <th><i class="fas fa-user" style="margin-right: 5px;"></i>姓名</th>
-                        <th><i class="fas fa-calendar-alt" style="margin-right: 5px;"></i>年龄</th>
-                        <th><i class="fas fa-id-card" style="margin-right: 5px;"></i>学号</th>
-                        <th><i class="fas fa-school" style="margin-right: 5px;"></i>班级</th>
-                        <th><i class="fas fa-cog" style="margin-right: 5px;"></i>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="6">
-                            <div class="empty-state">
-                                <i class="fas fa-search"></i>
-                                <p>暂无匹配的学生数据哦~</p>
-                                <a href="add.html" class="btn btn-primary">
-                                    <i class="fas fa-plus"></i> 快去添加第一个学生吧
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- 表格容器：支持横向滚动 -->
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-hashtag"></i>ID</th>
+                            <th><i class="fas fa-user"></i>姓名</th>
+                            <th><i class="fas fa-calendar-alt"></i>年龄</th>
+                            <th><i class="fas fa-id-card"></i>学号</th>
+                            <th><i class="fas fa-school"></i>班级</th>
+                            <th><i class="fas fa-cog"></i>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6">
+                                <div class="empty-state">
+                                    <i class="fas fa-search"></i>
+                                    <p>暂无匹配的学生数据哦~</p>
+                                    <a href="add.html" class="btn btn-primary">
+                                        <i class="fas fa-plus"></i> 快去添加第一个学生吧
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
