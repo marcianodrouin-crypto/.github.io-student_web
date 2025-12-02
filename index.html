@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>爱鲲学院学生管理系统</title>
-    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="css/common.css"> <!-- 去掉 / -->
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* 首页专属样式 - 降低白色遮罩不透明度，让背景图显示 */
         .home-bg {
-            /* 关键修改：白色遮罩不透明度从 0.9 → 0.6，背景图更清晰 */
+            /* 关键修改：去掉路径开头的 / */
             background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
-                              url("/images/home-bg.jpg");  /* 确认文件名和路径正确 */
-            background-size: cover;    /* 背景图铺满屏幕 */
-            background-position: center; /* 背景图居中 */
-            background-attachment: fixed; /* 滚动时背景固定 */
-            background-repeat: no-repeat; /* 禁止背景图重复 */
+                              url("images/home-bg.jpg");  /* 相对路径：根目录/images/home-bg.jpg */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
             min-height: 100vh;
             padding-bottom: 100px;
         }
@@ -284,8 +284,8 @@
             让管理更轻松，学习更高效！
         </p>
         <div class="auth-buttons">
-            <!-- 登录按钮：跳转到登录页面 -->
-            <a href="/login" class="btn auth-btn login-btn">
+            <!-- 登录按钮：相对路径跳转（去掉 /） -->
+            <a href="login.html" class="btn auth-btn login-btn">
                 <i class="fas fa-sign-in-alt mr-2"></i>登录系统
             </a>
             <button class="btn auth-btn register-btn">
@@ -300,7 +300,7 @@
     </div>
 </header>
 
-<!-- 插图展示区（滚动弹出）- 引用你的man/woman/rabbit.png -->
+<!-- 插图展示区（滚动弹出）- 去掉路径开头的 / -->
 <section class="scroll-section">
     <div class="section-container">
         <h2 class="section-title">
@@ -310,21 +310,21 @@
             <!-- 插图1：man.png -->
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img src="/images/man.png" alt="专注学习的同学">
+                    <img src="images/man.png" alt="专注学习的同学"> <!-- 相对路径 -->
                 </div>
                 <p class="illustration-text">专注学习的同学</p>
             </div>
             <!-- 插图2：woman.png -->
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img src="/images/woman.png" alt="温馨的师生互动">
+                    <img src="images/woman.png" alt="温馨的师生互动"> <!-- 相对路径 -->
                 </div>
                 <p class="illustration-text">温馨的师生互动</p>
             </div>
             <!-- 插图3：rabbit.png -->
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img src="/images/rabbit.png" alt="可爱的校园元素">
+                    <img src="images/rabbit.png" alt="可爱的校园元素"> <!-- 相对路径 -->
                 </div>
                 <p class="illustration-text">可爱的校园元素</p>
             </div>
@@ -375,7 +375,7 @@
     </div>
 </section>
 
-<!-- 卡通插图区（滚动弹出）- 引用你的fox/dolphin.png -->
+<!-- 卡通插图区（滚动弹出）- 去掉路径开头的 / -->
 <section class="scroll-section">
     <div class="section-container">
         <h2 class="section-title">
@@ -385,14 +385,14 @@
             <!-- 插图4：fox.png -->
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img src="/images/fox.png" alt="知识的狐狸">
+                    <img src="images/fox.png" alt="知识的狐狸"> <!-- 相对路径 -->
                 </div>
                 <p class="illustration-text">知识的狐狸</p>
             </div>
             <!-- 插图5：dolphin.png -->
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img src="/images/dolphin.png" alt="智慧的海豚">
+                    <img src="images/dolphin.png" alt="智慧的海豚"> <!-- 相对路径 -->
                 </div>
                 <p class="illustration-text">智慧的海豚</p>
             </div>
@@ -429,13 +429,26 @@
 
     // 向下滚动提示动画
     document.querySelector('.fa-chevron-down').style.animation = 'bounce 2s infinite';
-    document.styleSheet.insertRule(`
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-10px); }
-        }
-    `, document.styleSheet.cssRules.length);
+    try {
+        document.styleSheet.insertRule(`
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+                40% { transform: translateY(-20px); }
+                60% { transform: translateY(-10px); }
+            }
+        `, document.styleSheet.cssRules.length);
+    } catch (e) {
+        // 兼容部分浏览器的样式表插入问题，不影响功能
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+                40% { transform: translateY(-20px); }
+                60% { transform: translateY(-10px); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
 </script>
 </body>
 </html>
