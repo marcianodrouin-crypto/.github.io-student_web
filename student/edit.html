@@ -2,14 +2,67 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 自适应 viewport：禁止手动缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>编辑学生 - 爱鲲学院学生管理系统</title>
-    <!-- 相对路径引入样式和图标 -->
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 卡片移动端适配 */
+        .card {
+            padding: 20px 15px; /* 移动端减少内边距 */
+            margin-top: 25px;
+        }
+
+        h2 {
+            font-size: 1.6rem !important; /* 移动端缩小标题 */
+            margin-bottom: 20px !important;
+        }
+
+        /* 表单移动端适配 */
+        .form-group {
+            margin-bottom: 18px; /* 移动端减少表单间距 */
+        }
+
+        .form-label {
+            font-size: 0.95rem; /* 移动端缩小标签字体 */
+        }
+
+        .form-control {
+            padding: 10px 14px; /* 移动端缩小输入框内边距 */
+            font-size: 0.95rem; /* 移动端缩小输入框字体 */
+        }
+
+        textarea.form-control {
+            min-height: 80px; /* 移动端设置文本域最小高度 */
+        }
+
+        /* 按钮组移动端适配 */
+        .form-group + div {
+            flex-direction: column !important; /* 移动端垂直排列按钮 */
+            gap: 10px !important;
+            margin-top: 30px !important;
+        }
+
+        .form-group + div .btn {
+            width: 100% !important; /* 移动端按钮占满宽度 */
+            padding: 10px !important;
+            font-size: 0.95rem;
+        }
+
+        /* 响应式调整（平板横向排列按钮） */
+        @media (min-width: 768px) {
+            .form-group + div {
+                flex-direction: row !important; /* 平板及以上横向排列 */
+            }
+
+            .form-group + div .btn {
+                width: auto !important;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- 导航栏 -->
     <nav class="navbar">
         <div class="container navbar-container">
             <a href="../index.html" class="logo">
@@ -30,14 +83,12 @@
         </div>
     </nav>
 
-    <!-- 主内容区 -->
     <div class="container">
         <div class="card decorator">
             <h2 style="margin-bottom: 30px; font-size: 1.9rem; font-weight: 700; color: #333; display: flex; align-items: center; gap: 10px;">
                 <i class="fas fa-edit" style="color: #4A90E2;"></i> 编辑学生信息
             </h2>
 
-            <!-- 消息提示 -->
             <div class="alert alert-success" style="display: none;">
                 <i class="fas fa-check-circle"></i>
                 <span>修改学生信息成功！</span>
@@ -47,7 +98,6 @@
                 <span>修改学生信息失败，请检查信息！</span>
             </div>
 
-            <!-- 编辑表单（默认填充示例数据） -->
             <form>
                 <div class="form-group">
                     <label class="form-label">
@@ -91,7 +141,6 @@
                     <textarea class="form-control" rows="3">热爱学习，积极参加社团活动</textarea>
                 </div>
 
-                <!-- 按钮组 -->
                 <div style="display: flex; gap: 15px; margin-top: 40px;">
                     <button type="submit" class="btn btn-primary" style="flex: 1;">
                         <i class="fas fa-save"></i> 保存修改
