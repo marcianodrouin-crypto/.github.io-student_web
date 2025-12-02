@@ -2,129 +2,48 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>爱鲲学院 - 学生管理界面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱鲲学院 - 学生管理</title>
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/common.css">
     <style>
-        /* 核心：缩小搜索框，为表格腾空间 */
-        .search-bar {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-        .search-group {
-            flex: none !important; /* 取消搜索组自动拉伸 */
-            min-width: 180px !important; /* 缩小搜索框最小宽度 */
-        }
-        .form-control,
-        .search-select {
-            width: 180px !important; /* 搜索框固定宽度，缩小占用空间 */
-            padding: 10px 14px !important;
-            font-size: 0.95rem !important;
-        }
-        .search-btn, .btn-secondary {
-            padding: 10px 18px !important;
-        }
-
-        /* 表格列：充分利用腾出的空间，横向舒展 */
-        .table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 10px;
-            table-layout: auto;
-        }
-        .table th,
-        .table td {
-            white-space: nowrap;
-            padding: 18px 22px !important; /* 保留足够内边距 */
-            font-size: 1.05rem !important;
-            letter-spacing: 0.8px !important;
-        }
-        /* 关键列加宽，彻底横向显示 */
-        .table th:nth-child(3), /* 学生姓名 */
-        .table td:nth-child(3) {
-            width: 160px !important;
-        }
-        .table th:nth-child(4), /* 学号 */
-        .table td:nth-child(4) {
-            width: 180px !important;
-        }
-        .table th:nth-child(5), /* 班级 */
-        .table td:nth-child(5) {
-            width: 120px !important;
-        }
-        /* 操作列保持紧凑 */
-        .table th:last-child,
-        .table td:last-child {
-            width: 200px !important;
-            text-align: center;
-        }
-        .operate-btn {
-            margin: 0 6px !important;
-        }
-
-        /* 其他样式优化 */
-        .btn-group {
-            gap: 12px !important;
-            margin-bottom: 25px !important;
-        }
-        .card {
-            padding: 25px !important;
-        }
-        .student-avatar {
-            width: 50px !important;
-            height: 50px !important;
-        }
+        .search-bar { display: flex; gap: 15px; align-items: center; margin-bottom: 25px; flex-wrap: wrap; }
+        .search-group { flex: none; min-width: 180px; }
+        .form-control, .search-select { width: 180px; padding: 10px 14px; font-size: 0.95rem; }
+        .table { width: 100%; border-collapse: separate; border-spacing: 0 10px; table-layout: auto; }
+        .table th, .table td { padding: 18px 22px; font-size: 1.05rem; letter-spacing: 0.8px; white-space: nowrap; }
+        .table th:nth-child(3) { width: 160px; }
+        .table th:nth-child(4) { width: 180px; }
+        .table th:nth-child(5) { width: 120px; }
+        .operate-btn { margin: 0 6px; }
+        .pagination { display: flex; gap: 12px; justify-content: center; margin-top: 25px; }
     </style>
 </head>
 <body>
-<!-- 导航栏 -->
 <nav class="navbar">
     <div class="navbar-container container">
-        <a href="index.html" class="logo">
-            <i class="fas fa-graduation-cap"></i>
-            爱鲲学院学生管理系统
-        </a>
+        <a href="index.html" class="logo"><i class="fas fa-graduation-cap"></i>爱鲲学院学生管理系统</a>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">
-                <i class="fas fa-home"></i> 首页
-            </a>
-            <a href="student.html" class="nav-link">
-                <i class="fas fa-user-graduate"></i> 学生管理
-            </a>
-            <a href="#" class="nav-link">
-                <i class="fas fa-chart-bar"></i> 数据统计
-            </a>
-            <a href="#" class="nav-link">
-                <i class="fas fa-cog"></i> 系统设置
-            </a>
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i>首页</a>
+            <a href="student.html" class="nav-link"><i class="fas fa-user-graduate"></i>学生管理</a>
+            <a href="stats.html" class="nav-link"><i class="fas fa-chart-bar"></i>数据统计</a>
+            <a href="settings.html" class="nav-link"><i class="fas fa-cog"></i>系统设置</a>
         </div>
     </div>
 </nav>
 
-<!-- 主要内容区 -->
 <div class="container" style="max-width: 1400px; width: 98%;">
-    <!-- 搜索栏：缩小宽度，腾出空间 -->
     <div class="search-bar">
         <div class="search-group">
-            <label for="name" class="form-label" style="font-size: 0.95rem;">
-                <i class="fas fa-user"></i> 姓名
-            </label>
+            <label for="name" class="form-label" style="font-size: 0.95rem;"><i class="fas fa-user"></i>姓名</label>
             <input type="text" id="name" class="form-control" placeholder="请输入姓名">
         </div>
         <div class="search-group">
-            <label for="studentId" class="form-label" style="font-size: 0.95rem;">
-                <i class="fas fa-id-card"></i> 学号
-            </label>
+            <label for="studentId" class="form-label" style="font-size: 0.95rem;"><i class="fas fa-id-card"></i>学号</label>
             <input type="text" id="studentId" class="form-control" placeholder="请输入学号">
         </div>
         <div class="search-group">
-            <label for="class" class="form-label" style="font-size: 0.95rem;">
-                <i class="fas fa-users-class"></i> 班级
-            </label>
+            <label for="class" class="form-label" style="font-size: 0.95rem;"><i class="fas fa-users-class"></i>班级</label>
             <select id="class" class="search-select">
                 <option value="">全部班级</option>
                 <option value="1班">1班</option>
@@ -132,108 +51,152 @@
                 <option value="3班">3班</option>
             </select>
         </div>
-        <button class="btn btn-primary search-btn">
-            <i class="fas fa-search"></i> 搜索
-        </button>
-        <button class="btn btn-secondary">
-            <i class="fas fa-redo"></i> 重置
-        </button>
+        <button class="btn btn-primary search-btn"><i class="fas fa-search"></i>搜索</button>
+        <button class="btn btn-secondary"><i class="fas fa-redo"></i>重置</button>
     </div>
 
-    <!-- 功能按钮区 -->
-    <div class="btn-group">
-        <button class="btn btn-primary" id="addStudent">
-            <i class="fas fa-plus"></i> 新增学生
-        </button>
-        <button class="btn btn-secondary" id="editStudent">
-            <i class="fas fa-edit"></i> 编辑信息
-        </button>
-        <button class="btn btn-danger" id="deleteStudent">
-            <i class="fas fa-trash"></i> 删除学生
-        </button>
-        <button class="btn btn-secondary" id="exportData">
-            <i class="fas fa-download"></i> 导出数据
-        </button>
+    <div class="btn-group" style="gap: 12px; margin-bottom: 25px;">
+        <button class="btn btn-primary" id="addStudent"><i class="fas fa-plus"></i>新增学生</button>
+        <button class="btn btn-secondary" id="editStudent"><i class="fas fa-edit"></i>编辑信息</button>
+        <button class="btn btn-danger" id="deleteStudent"><i class="fas fa-trash"></i>删除学生</button>
+        <button class="btn btn-secondary" id="exportData"><i class="fas fa-download"></i>导出数据</button>
     </div>
 
-    <!-- 学生表格：利用腾出的空间，横向舒展 -->
-    <div class="card">
+    <div class="card" style="padding: 25px;">
         <table class="table">
             <thead>
-            <tr>
-                <th>序号</th>
-                <th>头像</th>
-                <th>学生姓名</th>
-                <th>学号</th>
-                <th>班级</th>
-                <th>性别</th>
-                <th>年龄</th>
-                <th>操作</th>
-            </tr>
+                <tr>
+                    <th>序号</th>
+                    <th>头像</th>
+                    <th>学生姓名</th>
+                    <th>学号</th>
+                    <th>班级</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>操作</th>
+                </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td><img src="images/man.png" alt="学生头像" class="student-avatar"></td>
-                <td>张三</td>
-                <td>2025001</td>
-                <td>1班</td>
-                <td>男</td>
-                <td>18</td>
-                <td>
-                    <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025001')">查看</button>
-                    <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025001')">编辑</button>
-                    <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025001')">删除</button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><img src="images/woman.png" alt="学生头像" class="student-avatar"></td>
-                <td>李四</td>
-                <td>2025002</td>
-                <td>2班</td>
-                <td>女</td>
-                <td>17</td>
-                <td>
-                    <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025002')">查看</button>
-                    <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025002')">编辑</button>
-                    <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025002')">删除</button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td><img src="images/rabbit.png" alt="学生头像" class="student-avatar"></td>
-                <td>王五</td>
-                <td>2025003</td>
-                <td>3班</td>
-                <td>男</td>
-                <td>18</td>
-                <td>
-                    <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025003')">查看</button>
-                    <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025003')">编辑</button>
-                    <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025003')">删除</button>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td><img src="images/fox.png" alt="学生头像" class="student-avatar"></td>
-                <td>赵六</td>
-                <td>2025004</td>
-                <td>1班</td>
-                <td>女</td>
-                <td>18</td>
-                <td>
-                    <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025004')">查看</button>
-                    <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025004')">编辑</button>
-                    <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025004')">删除</button>
-                </td>
-            </tr>
+                <!-- 第1页数据 -->
+                <tr>
+                    <td>1</td>
+                    <td><img src="images/man.png" alt="头像" style="width:50px;height:50px;border-radius:50%;"></td>
+                    <td>张三</td>
+                    <td>2025001</td>
+                    <td>1班</td>
+                    <td>男</td>
+                    <td>18</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary operate-btn">查看</button>
+                        <button class="btn btn-sm btn-secondary operate-btn">编辑</button>
+                        <button class="btn btn-sm btn-danger operate-btn">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><img src="images/woman.png" alt="头像" style="width:50px;height:50px;border-radius:50%;"></td>
+                    <td>李四</td>
+                    <td>2025002</td>
+                    <td>2班</td>
+                    <td>女</td>
+                    <td>17</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary operate-btn">查看</button>
+                        <button class="btn btn-sm btn-secondary operate-btn">编辑</button>
+                        <button class="btn btn-sm btn-danger operate-btn">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><img src="images/rabbit.png" alt="头像" style="width:50px;height:50px;border-radius:50%;"></td>
+                    <td>王五</td>
+                    <td>2025003</td>
+                    <td>3班</td>
+                    <td>男</td>
+                    <td>18</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary operate-btn">查看</button>
+                        <button class="btn btn-sm btn-secondary operate-btn">编辑</button>
+                        <button class="btn btn-sm btn-danger operate-btn">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><img src="images/fox.png" alt="头像" style="width:50px;height:50px;border-radius:50%;"></td>
+                    <td>赵六</td>
+                    <td>2025004</td>
+                    <td>1班</td>
+                    <td>女</td>
+                    <td>18</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary operate-btn">查看</button>
+                        <button class="btn btn-sm btn-secondary operate-btn">编辑</button>
+                        <button class="btn btn-sm btn-danger operate-btn">删除</button>
+                    </td>
+                </tr>
+                <!-- 第2页假数据 -->
+                <tr>
+                    <td>5</td>
+                    <td><img src="images/man.png" alt="头像" style="width:50px;height:50px;border-radius:50%;"></td>
+                    <td>孙七</td>
+                    <td>2025005</td>
+                    <td>2班</td>
+                    <td>男</td>
+                    <td>19</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary operate-btn">查看</button>
+                        <button class="btn btn-sm btn-secondary operate-btn">编辑</button>
+                        <button class="btn btn-sm btn-danger operate-btn">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><img src="images/woman.png" alt="头像" style="width:50px;height:50px;border-radius:50%;"></td>
+                    <td>周八</td>
+                    <td>2025006</td>
+                    <td>3班</td>
+                    <td>女</td>
+                    <td>18</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary operate-btn">查看</button>
+                        <button class="btn btn-sm btn-secondary operate-btn">编辑</button>
+                        <button class="btn btn-sm btn-danger operate-btn">删除</button>
+                    </td>
+                </tr>
+                <!-- 第3页假数据 -->
+                <tr>
+                    <td>7</td>
+                    <td><img src="images/rabbit.png" alt="头像" style="width:50px;height:50px;border-radius:50%;"></td>
+                    <td>吴九</td>
+                    <td>2025007</td>
+                    <td>1班</td>
+                    <td>男</td>
+                    <td>17</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary operate-btn">查看</button>
+                        <button class="btn btn-sm btn-secondary operate-btn">编辑</button>
+                        <button class="btn btn-sm btn-danger operate-btn">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><img src="images/fox.png" alt="头像" style="width:50px;height:50px;border-radius:50%;"></td>
+                    <td>郑十</td>
+                    <td>2025008</td>
+                    <td>2班</td>
+                    <td>女</td>
+                    <td>18</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary operate-btn">查看</button>
+                        <button class="btn btn-sm btn-secondary operate-btn">编辑</button>
+                        <button class="btn btn-sm btn-danger operate-btn">删除</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- 分页 -->
-    <div class="pagination" style="display: flex; gap: 12px; justify-content: center; margin-top: 25px;">
+    <div class="pagination">
         <button class="btn btn-sm btn-secondary page-btn">上一页</button>
         <button class="btn btn-sm btn-primary page-btn active">1</button>
         <button class="btn btn-sm btn-secondary page-btn">2</button>
@@ -243,33 +206,5 @@
 </div>
 
 <script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-<script>
-    // 功能脚本保留原逻辑
-    document.getElementById('addStudent').addEventListener('click', function() {
-        alert('打开新增学生页面（后续对接后端）');
-    });
-    document.getElementById('editStudent').addEventListener('click', function() {
-        alert('请先选择要编辑的学生（后续对接后端）');
-    });
-    document.getElementById('deleteStudent').addEventListener('click', function() {
-        if(confirm('确定要删除选中的学生吗？')) {
-            alert('删除成功（后续对接后端）');
-        }
-    });
-    document.getElementById('exportData').addEventListener('click', function() {
-        alert('导出数据成功（后续对接后端）');
-    });
-    function toDetail(studentId) {
-        alert(`查看学号${studentId}的学生详情（后续对接后端）`);
-    }
-    function toEdit(studentId) {
-        alert(`编辑学号${studentId}的学生信息（后续对接后端）`);
-    }
-    function toDelete(studentId) {
-        if(confirm(`确定要删除学号${studentId}的学生吗？`)) {
-            alert(`删除学号${studentId}的学生成功（后续对接后端）`);
-        }
-    }
-</script>
 </body>
 </html>
