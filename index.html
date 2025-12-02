@@ -2,7 +2,6 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <!-- 自适应 viewport：禁止手动缩放，自动适配屏幕宽度 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>爱鲲学院学生管理系统</title>
     <link rel="stylesheet" href="css/common.css">
@@ -16,18 +15,18 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
             min-height: 100vh;
-            padding-bottom: 60px; /* 移动端减少底部内边距 */
+            padding-bottom: 60px;
         }
 
         /* 头部区域 - 移动端适配 */
         .home-header {
-            padding: 40px 0 30px; /* 移动端减少上下内边距 */
+            padding: 40px 0 30px;
             text-align: center;
             position: relative;
         }
 
         .home-title {
-            font-size: 2rem; /* 移动端缩小标题字体 */
+            font-size: 2rem;
             font-weight: 700;
             color: #4A90E2;
             margin-bottom: 15px;
@@ -36,9 +35,9 @@
         }
 
         .home-subtitle {
-            font-size: 1rem; /* 移动端缩小副标题字体 */
+            font-size: 1rem;
             color: #666;
-            max-width: 100%; /* 移动端占满宽度 */
+            max-width: 100%;
             margin: 0 auto 25px;
             line-height: 1.6;
             padding: 0 10px;
@@ -53,19 +52,19 @@
         }
 
         .auth-btn {
-            padding: 10px 25px; /* 移动端缩小按钮内边距 */
+            padding: 10px 25px;
             font-size: 1rem;
             border-radius: 25px;
             font-weight: 600;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            flex: 1; /* 移动端按钮平分宽度 */
+            flex: 1;
         }
 
         /* 滚动弹出元素样式 */
         .scroll-section {
-            padding: 40px 0; /* 移动端减少上下内边距 */
+            padding: 40px 0;
             opacity: 0;
-            transform: translateY(30px); /* 移动端减少位移距离 */
+            transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
@@ -75,7 +74,7 @@
         }
 
         .section-title {
-            font-size: 1.6rem; /* 移动端缩小 section 标题 */
+            font-size: 1.6rem;
             font-weight: 700;
             color: #333;
             margin-bottom: 25px;
@@ -96,19 +95,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px; /* 移动端减少插图间距 */
+            gap: 20px;
             flex-wrap: wrap;
             margin-bottom: 30px;
         }
 
         .illustration-item {
             text-align: center;
-            max-width: 140px; /* 移动端缩小插图容器宽度 */
+            max-width: 140px;
             transition: all 0.5s ease;
         }
 
         .illustration-img {
-            width: 120px; /* 移动端缩小插图尺寸 */
+            width: 120px;
             height: 120px;
             border-radius: 15px;
             background-color: #F8FBFF;
@@ -120,17 +119,14 @@
             border: 2px solid #E8F4FF;
         }
 
-        /* 图片样式：确保显示 */
-        .illustration-img img {
+        /* 内嵌SVG图标（替代外部图片，100%显示） */
+        .svg-icon {
             width: 80px;
             height: 80px;
-            object-fit: contain;
-            /* 强制显示，避免透明问题 */
-            background-color: transparent;
         }
 
         .illustration-text {
-            font-size: 0.9rem; /* 移动端缩小文字 */
+            font-size: 0.9rem;
             color: #555;
             font-weight: 500;
         }
@@ -138,8 +134,8 @@
         /* 特色功能区 - 移动端适配 */
         .features-container {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 移动端2列布局 */
-            gap: 15px; /* 移动端减少间距 */
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
             margin-top: 20px;
         }
 
@@ -147,13 +143,13 @@
             background-color: white;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(74, 144, 226, 0.08);
-            padding: 15px; /* 移动端减少内边距 */
+            padding: 15px;
             transition: all 0.3s ease;
             border: 1px solid #F0F7FF;
         }
 
         .feature-title {
-            font-size: 1.1rem; /* 移动端缩小标题 */
+            font-size: 1.1rem;
             font-weight: 600;
             color: #333;
             margin-bottom: 8px;
@@ -162,20 +158,20 @@
         .feature-desc {
             color: #666;
             line-height: 1.5;
-            font-size: 0.85rem; /* 移动端缩小描述文字 */
+            font-size: 0.85rem;
         }
 
         /* 底部区域 - 移动端适配 */
         .home-footer {
             background-color: rgba(74, 144, 226, 0.05);
-            padding: 20px 0; /* 移动端减少内边距 */
+            padding: 20px 0;
             text-align: center;
             margin-top: 40px;
         }
 
         .footer-text {
             color: #777;
-            font-size: 0.85rem; /* 移动端缩小文字 */
+            font-size: 0.85rem;
         }
 
         /* 向下滚动提示 - 移动端适配 */
@@ -194,7 +190,7 @@
             }
 
             .features-container {
-                grid-template-columns: 1fr; /* 小屏手机1列布局 */
+                grid-template-columns: 1fr;
             }
         }
 
@@ -249,22 +245,48 @@
             <i class="fas fa-graduation-cap"></i> 校园风采
         </h2>
         <div class="illustration-container">
+            <!-- 内嵌SVG：专注学习的同学 -->
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <!-- 阿里云CDN：稳定国内访问 -->
-                    <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8e230a35714142c888a78487d13233ac~tplv-k3u1fbpfcp-zoom-1.image" alt="专注学习的同学">
+                    <svg class="svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 20C38.954 20 30 28.954 30 40V70C30 81.046 38.954 90 50 90C61.046 90 70 81.046 70 70V40C70 28.954 61.046 20 50 20Z" fill="#FFD6E0"/>
+                        <path d="M50 10C35.147 10 23 22.147 23 37V70C23 84.853 35.147 97 50 97C64.853 97 77 84.853 77 70V37C77 22.147 64.853 10 50 10Z" fill="#FF9DB0"/>
+                        <path d="M40 35C40 32.2386 42.2386 30 45 30H55C57.7614 30 60 32.2386 60 35V45C60 47.7614 57.7614 50 55 50H45C42.2386 50 40 47.7614 40 45V35Z" fill="#FFFFFF"/>
+                        <path d="M43 33H57V43H43V33Z" fill="#FFB6C1"/>
+                        <path d="M40 55H60V65H40V55Z" fill="#FFE6EC"/>
+                    </svg>
                 </div>
                 <p class="illustration-text">专注学习的同学</p>
             </div>
+
+            <!-- 内嵌SVG：温馨的师生互动 -->
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e3a4a82e99d4c758d32a7e833953451~tplv-k3u1fbpfcp-zoom-1.image" alt="温馨的师生互动">
+                    <svg class="svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M30 30C21.7157 30 15 36.7157 15 45V75C15 83.2843 21.7157 90 30 90C38.2843 90 45 83.2843 45 75V45C45 36.7157 38.2843 30 30 30Z" fill="#BDE0FE"/>
+                        <path d="M70 30C61.7157 30 55 36.7157 55 45V75C55 83.2843 61.7157 90 70 90C78.2843 90 85 83.2843 85 75V45C85 36.7157 78.2843 30 70 30Z" fill="#FFD6E0"/>
+                        <path d="M25 40H35V50H25V40Z" fill="#FFFFFF"/>
+                        <path d="M65 40H75V50H65V40Z" fill="#FFFFFF"/>
+                        <path d="M30 60H40V70H20V60H30Z" fill="#E6F7FF"/>
+                        <path d="M60 60H70V70H50V60H60Z" fill="#FFE6EC"/>
+                        <path d="M40 50H60V60H40V50Z" fill="#F0F9FF" stroke="#4A90E2" stroke-width="2"/>
+                    </svg>
                 </div>
                 <p class="illustration-text">温馨的师生互动</p>
             </div>
+
+            <!-- 内嵌SVG：可爱的校园元素 -->
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b1c3a8b8f5f45d0a940a981327f2b1f~tplv-k3u1fbpfcp-zoom-1.image" alt="可爱的校园元素">
+                    <svg class="svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 20C35.147 20 23 32.147 23 47V70C23 84.853 35.147 97 50 97C64.853 97 77 84.853 77 70V47C77 32.147 64.853 20 50 20Z" fill="#FFFACD"/>
+                        <path d="M50 15C33.4315 15 20 28.4315 20 45V75C20 91.5685 33.4315 105 50 105C66.5685 105 80 91.5685 80 75V45C80 28.4315 66.5685 15 50 15Z" fill="#FFE4B5"/>
+                        <path d="M40 35C40 32.2386 42.2386 30 45 30H55C57.7614 30 60 32.2386 60 35V45C60 47.7614 57.7614 50 55 50H45C42.2386 50 40 47.7614 40 45V35Z" fill="#FFFFFF"/>
+                        <path d="M43 33H57V43H43V33Z" fill="#FFD700"/>
+                        <path d="M35 60H65V70H35V60Z" fill="#FFF8DC"/>
+                        <path d="M25 50H35V60H25V50Z" fill="#FFD700" opacity="0.5"/>
+                        <path d="M65 50H75V60H65V50Z" fill="#FFD700" opacity="0.5"/>
+                    </svg>
                 </div>
                 <p class="illustration-text">可爱的校园元素</p>
             </div>
@@ -316,15 +338,32 @@
             <i class="fas fa-palette"></i> 可爱元素
         </h2>
         <div class="illustration-container">
+            <!-- 内嵌SVG：知识的狐狸 -->
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3a9d61c85f0a45d08f2e2579915914e0~tplv-k3u1fbpfcp-zoom-1.image" alt="知识的狐狸">
+                    <svg class="svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 20C38.954 20 30 28.954 30 40V70C30 81.046 38.954 90 50 90C61.046 90 70 81.046 70 70V40C70 28.954 61.046 20 50 20Z" fill="#FFC0CB"/>
+                        <path d="M50 15C35.147 15 23 27.147 23 42V75C23 89.853 35.147 102 50 102C64.853 102 77 89.853 77 75V42C77 27.147 64.853 15 50 15Z" fill="#FF69B4"/>
+                        <path d="M40 35C40 32.2386 42.2386 30 45 30H55C57.7614 30 60 32.2386 60 35V45C60 47.7614 57.7614 50 55 50H45C42.2386 50 40 47.7614 40 45V35Z" fill="#FFFFFF"/>
+                        <path d="M43 33H57V43H43V33Z" fill="#FFB6C1"/>
+                        <path d="M35 55H65V65H35V55Z" fill="#FFE6EC"/>
+                        <path d="M25 45H35V55H25V45Z" fill="#FF69B4" opacity="0.5"/>
+                        <path d="M65 45H75V55H65V45Z" fill="#FF69B4" opacity="0.5"/>
+                    </svg>
                 </div>
                 <p class="illustration-text">知识的狐狸</p>
             </div>
+
+            <!-- 内嵌SVG：智慧的海豚 -->
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8f7f4a7d3c5e4a7a8b4e3d7e8f9c7d6b~tplv-k3u1fbpfcp-zoom-1.image" alt="智慧的海豚">
+                    <svg class="svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M70 50C70 60 60 70 50 70C40 70 30 60 30 50C30 40 40 30 50 30C60 30 70 40 70 50Z" fill="#87CEFA"/>
+                        <path d="M75 50C75 62 65 72 55 72C45 72 35 62 35 50C35 38 45 28 55 28C65 28 75 38 75 50Z" fill="#4682B4"/>
+                        <path d="M60 45C60 42.2386 62.2386 40 65 40H75C77.7614 40 80 42.2386 80 45V55C80 57.7614 77.7614 60 75 60H65C62.2386 60 60 57.7614 60 55V45Z" fill="#FFFFFF"/>
+                        <path d="M63 43H77V53H63V43Z" fill="#BDE0FE"/>
+                        <path d="M40 55H50V65H30V55H40Z" fill="#E6F7FF"/>
+                    </svg>
                 </div>
                 <p class="illustration-text">智慧的海豚</p>
             </div>
@@ -343,21 +382,17 @@
     document.addEventListener('DOMContentLoaded', function() {
         const scrollSections = document.querySelectorAll('.scroll-section');
 
-        // 滚动显示section（简化逻辑，确保触发）
         function checkVisibility() {
             scrollSections.forEach(section => {
                 const sectionTop = section.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
-                // 扩大触发范围，确保滚动时能显示
                 if (sectionTop < windowHeight - 20) {
                     section.classList.add('active');
                 }
             });
         }
 
-        // 初始加载就检查一次，避免滚动才显示
         checkVisibility();
-        // 滚动时再次检查
         window.addEventListener('scroll', checkVisibility);
     });
 </script>
