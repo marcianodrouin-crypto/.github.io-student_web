@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新增学生 - 爱鲲学院学生管理系统</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<!-- 导航栏 -->
+<nav class="navbar">
+    <div class="container navbar-container">
+        <a href="/students/list" class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            爱鲲学院学生管理系统
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">
+                <i class="fas fa-home"></i> 首页
+            </a>
+            <a href="/students/add" class="nav-link">
+                <i class="fas fa-user-plus"></i> 新增学生
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-question-circle"></i> 帮助
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- 主内容区 -->
+<div class="container">
+    <div class="card decorator" style="max-width: 650px; margin: 40px auto;">
+        <div class="detail-header">
+            <div class="detail-avatar">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            <div>
+                <h2 class="detail-title">新增学生</h2>
+                <p class="detail-subtitle">填写以下信息，添加可爱的新同学吧~</p>
+            </div>
+        </div>
+
+        <!-- 表单 -->
+        <form th:action="@{/students/add}" method="post" th:object="${student}">
+            <!-- 错误提示 -->
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle"></i>
+                <ul th:each="error : ${#fields.errors('*')}" style="list-style: none; margin: 0; padding-left: 5px;">
+                    <li>[[${error}]]</li>
+                </ul>
+            </div>
+
+            <!-- 姓名 -->
+            <div class="form-group">
+                <label for="name" class="form-label">
+                    <i class="fas fa-user"></i> 姓名 <span style="color: #FF6B85;">*</span>
+                </label>
+                <input type="text" id="name" class="form-control" th:field="*{name}" placeholder="请输入学生姓名（如：张三）">
+            </div>
+
+            <!-- 年龄 -->
+            <div class="form-group">
+                <label for="age" class="form-label">
+                    <i class="fas fa-calendar-alt"></i> 年龄 <span style="color: #FF6B85;">*</span>
+                </label>
+                <input type="number" id="age" class="form-control" th:field="*{age}" placeholder="请输入学生年龄（如：20）" min="1">
+            </div>
+
+            <!-- 学号 -->
+            <div class="form-group">
+                <label for="studentNo" class="form-label">
+                    <i class="fas fa-id-card"></i> 学号 <span style="color: #FF6B85;">*</span>
+                </label>
+                <input type="text" id="studentNo" class="form-control" th:field="*{studentNo}" placeholder="请输入唯一学号（如：2025001）">
+            </div>
+
+            <!-- 班级 -->
+            <div class="form-group">
+                <label for="className" class="form-label">
+                    <i class="fas fa-school"></i> 班级 <span style="color: #FF6B85;">*</span>
+                </label>
+                <input type="text" id="className" class="form-control" th:field="*{className}" placeholder="请输入班级名称（如：计算机1班）">
+            </div>
+
+            <!-- 按钮组 -->
+            <div style="display: flex; gap: 15px; margin-top: 35px;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">
+                    <i class="fas fa-check"></i> 提交添加
+                </button>
+                <a th:href="@{/students/list}" class="btn btn-secondary" style="flex: 1;">
+                    <i class="fas fa-arrow-left"></i> 取消返回
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 爱鲲学院学生管理系统</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 登录页专属样式 */
+        .login-bg {
+            /* 复用首页背景图，保持风格统一 */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+                              url("/images/home-bg.jpg");
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .login-card {
+            background-color: white;
+            border-radius: 25px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.15);
+            border: 2px solid #E8F4FF;
+            max-width: 450px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4A90E2;
+            text-align: center;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 30px;
+        }
+
+        .login-form .form-label {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .login-input {
+            position: relative;
+        }
+
+        .login-input i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4A90E2;
+            font-size: 1.1rem;
+        }
+
+        .login-input .form-control {
+            padding-left: 45px;
+            height: 50px;
+            font-size: 1rem;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px 0;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .login-btn:hover {
+            background-color: #3A80D2;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.2);
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back-home a {
+            color: #4A90E2;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-home a:hover {
+            color: #3A80D2;
+            text-decoration: underline;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 40px 30px;
+            }
+
+            .login-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body class="login-bg">
+<div class="container">
+    <div class="login-card">
+        <h2 class="login-title">
+            <i class="fas fa-sign-in-alt"></i> 登录系统
+        </h2>
+        <!-- 登录表单：提交到/login接口，无论输入什么都跳转 -->
+        <form class="login-form" action="/login" method="post">
+            <div class="form-group">
+                <label for="username" class="form-label">账号</label>
+                <div class="login-input">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" class="form-control" name="username" placeholder="请输入账号" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">密码</label>
+                <div class="login-input">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" class="form-control" name="password" placeholder="请输入密码" required>
+                </div>
+            </div>
+            <button type="submit" class="btn login-btn">
+                <i class="fas fa-arrow-right mr-2"></i> 登录
+            </button>
+            <div class="back-home">
+                <a href="/">返回首页</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</body>
+</html>
