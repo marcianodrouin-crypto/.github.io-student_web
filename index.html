@@ -120,17 +120,13 @@
             border: 2px solid #E8F4FF;
         }
 
-        /* 懒加载图片样式 */
-        .lazy-img {
-            width: 80px; /* 固定尺寸，提升加载速度 */
+        /* 图片样式：确保显示 */
+        .illustration-img img {
+            width: 80px;
             height: 80px;
             object-fit: contain;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .lazy-img.loaded {
-            opacity: 1;
+            /* 强制显示，避免透明问题 */
+            background-color: transparent;
         }
 
         .illustration-text {
@@ -255,20 +251,20 @@
         <div class="illustration-container">
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <!-- 国内CDN+懒加载图片 -->
-                    <img class="lazy-img" data-src="https://cdn.staticaly.com/gh/liyupi/pic-lib/blob/main/img/cartoon-student-1.png" alt="专注学习的同学">
+                    <!-- 阿里云CDN：稳定国内访问 -->
+                    <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8e230a35714142c888a78487d13233ac~tplv-k3u1fbpfcp-zoom-1.image" alt="专注学习的同学">
                 </div>
                 <p class="illustration-text">专注学习的同学</p>
             </div>
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img class="lazy-img" data-src="https://cdn.staticaly.com/gh/liyupi/pic-lib/blob/main/img/cartoon-student-2.png" alt="温馨的师生互动">
+                    <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e3a4a82e99d4c758d32a7e833953451~tplv-k3u1fbpfcp-zoom-1.image" alt="温馨的师生互动">
                 </div>
                 <p class="illustration-text">温馨的师生互动</p>
             </div>
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img class="lazy-img" data-src="https://cdn.staticaly.com/gh/liyupi/pic-lib/blob/main/img/cartoon-animal-rabbit.png" alt="可爱的校园元素">
+                    <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b1c3a8b8f5f45d0a940a981327f2b1f~tplv-k3u1fbpfcp-zoom-1.image" alt="可爱的校园元素">
                 </div>
                 <p class="illustration-text">可爱的校园元素</p>
             </div>
@@ -322,13 +318,13 @@
         <div class="illustration-container">
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img class="lazy-img" data-src="https://cdn.staticaly.com/gh/liyupi/pic-lib/blob/main/img/cartoon-animal-fox.png" alt="知识的狐狸">
+                    <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3a9d61c85f0a45d08f2e2579915914e0~tplv-k3u1fbpfcp-zoom-1.image" alt="知识的狐狸">
                 </div>
                 <p class="illustration-text">知识的狐狸</p>
             </div>
             <div class="illustration-item">
                 <div class="illustration-img">
-                    <img class="lazy-img" data-src="https://cdn.staticaly.com/gh/liyupi/pic-lib/blob/main/img/cartoon-animal-dolphin.png" alt="智慧的海豚">
+                    <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8f7f4a7d3c5e4a7a8b4e3d7e8f9c7d6b~tplv-k3u1fbpfcp-zoom-1.image" alt="智慧的海豚">
                 </div>
                 <p class="illustration-text">智慧的海豚</p>
             </div>
@@ -347,45 +343,21 @@
     document.addEventListener('DOMContentLoaded', function() {
         const scrollSections = document.querySelectorAll('.scroll-section');
 
-        // 滚动显示section
+        // 滚动显示section（简化逻辑，确保触发）
         function checkVisibility() {
             scrollSections.forEach(section => {
                 const sectionTop = section.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
-                if (sectionTop < windowHeight - 50) {
+                // 扩大触发范围，确保滚动时能显示
+                if (sectionTop < windowHeight - 20) {
                     section.classList.add('active');
                 }
             });
         }
 
-        // 图片懒加载
-        function initLazyLoad() {
-            const lazyImages = document.querySelectorAll('.lazy-img');
-            
-            function loadLazyImage(img) {
-                img.src = img.dataset.src;
-                img.classList.add('loaded');
-            }
-
-            // 检查可视区域内的图片
-            function checkLazyImages() {
-                lazyImages.forEach(img => {
-                    const rect = img.getBoundingClientRect();
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        loadLazyImage(img);
-                    }
-                });
-            }
-
-            // 初始检查 + 滚动/窗口调整时检查
-            checkLazyImages();
-            window.addEventListener('scroll', checkLazyImages);
-            window.addEventListener('resize', checkLazyImages);
-        }
-
-        // 初始化
+        // 初始加载就检查一次，避免滚动才显示
         checkVisibility();
-        initLazyLoad();
+        // 滚动时再次检查
         window.addEventListener('scroll', checkVisibility);
     });
 </script>
