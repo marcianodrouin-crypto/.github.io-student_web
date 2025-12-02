@@ -2,14 +2,108 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 自适应 viewport：禁止手动缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>学生详情 - 爱鲲学院学生管理系统</title>
-    <!-- 相对路径引入样式和图标 -->
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 卡片移动端适配 */
+        .card {
+            padding: 20px 15px; /* 移动端减少内边距 */
+            margin-top: 25px;
+        }
+
+        /* 详情头部移动端适配 */
+        .detail-header {
+            flex-direction: column; /* 移动端垂直排列 */
+            gap: 10px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+        }
+
+        .detail-avatar {
+            width: 60px; /* 移动端缩小头像 */
+            height: 60px;
+        }
+
+        .detail-avatar i {
+            font-size: 2.2rem; /* 移动端缩小图标 */
+        }
+
+        .detail-title {
+            font-size: 1.5rem !important; /* 移动端缩小标题 */
+            text-align: center;
+        }
+
+        .detail-subtitle {
+            font-size: 0.9rem; /* 移动端缩小副标题 */
+            text-align: center;
+        }
+
+        /* 详情卡片移动端适配 */
+        .detail-card {
+            padding: 20px 15px; /* 移动端减少内边距 */
+            margin-top: 20px;
+        }
+
+        .detail-item {
+            flex-direction: column; /* 移动端垂直排列 */
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+        }
+
+        .detail-label {
+            width: 100%; /* 移动端占满宽度 */
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 1rem;
+            padding-top: 0;
+        }
+
+        /* 操作按钮组移动端适配 */
+        .detail-card + div {
+            flex-direction: column !important; /* 移动端垂直排列 */
+            gap: 10px !important;
+            margin-top: 25px !important;
+        }
+
+        .detail-card + div .btn {
+            width: 100% !important; /* 移动端按钮占满宽度 */
+            padding: 10px !important;
+            font-size: 0.95rem;
+        }
+
+        /* 响应式调整（平板横向排列） */
+        @media (min-width: 768px) {
+            .detail-header {
+                flex-direction: row; /* 平板及以上横向排列 */
+                text-align: left;
+            }
+
+            .detail-title, .detail-subtitle {
+                text-align: left;
+            }
+
+            .detail-item {
+                flex-direction: row; /* 平板及以上横向排列 */
+            }
+
+            .detail-card + div {
+                flex-direction: row !important; /* 平板及以上横向排列 */
+                justify-content: flex-end !important;
+            }
+
+            .detail-card + div .btn {
+                width: auto !important;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- 导航栏 -->
     <nav class="navbar">
         <div class="container navbar-container">
             <a href="../index.html" class="logo">
@@ -30,10 +124,8 @@
         </div>
     </nav>
 
-    <!-- 主内容区 -->
     <div class="container">
         <div class="card decorator">
-            <!-- 详情页头部 -->
             <div class="detail-header">
                 <div class="detail-avatar">
                     <i class="fas fa-user-circle"></i>
@@ -44,7 +136,6 @@
                 </div>
             </div>
 
-            <!-- 详情内容卡片 -->
             <div class="detail-card">
                 <div class="detail-item">
                     <div class="detail-label">
@@ -82,7 +173,6 @@
                 </div>
             </div>
 
-            <!-- 操作按钮组 -->
             <div style="display: flex; gap: 15px; margin-top: 30px; justify-content: flex-end;">
                 <a href="edit.html" class="btn btn-primary">
                     <i class="fas fa-edit"></i> 编辑信息
