@@ -1,98 +1,102 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>学生详情 - 爱鲲学院学生管理系统</title>
-    <link rel="stylesheet" href="/css/common.css">
+    <!-- 相对路径引入样式和图标 -->
+    <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<!-- 导航栏 -->
-<nav class="navbar">
-    <div class="container navbar-container">
-        <a href="/students/list" class="logo">
-            <i class="fas fa-graduation-cap"></i>
-            爱鲲学院学生管理系统
-        </a>
-        <div class="nav-links">
-            <a href="/" class="nav-link">
-                <i class="fas fa-home"></i> 首页
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                爱鲲学院学生管理系统
             </a>
-            <a href="/students/add" class="nav-link">
-                <i class="fas fa-user-plus"></i> 新增学生
-            </a>
-            <a href="#" class="nav-link">
-                <i class="fas fa-question-circle"></i> 帮助
-            </a>
-        </div>
-    </div>
-</nav>
-
-<!-- 主内容区 -->
-<div class="container">
-    <div class="card decorator" style="max-width: 700px; margin: 40px auto;">
-        <div class="detail-header">
-            <div class="detail-avatar">
-                <i class="fas fa-user-circle"></i>
-            </div>
-            <div>
-                <h2 class="detail-title" th:text="${student.name} ? ${student.name} + ' 的详情' : '学生详情'"></h2>
-                <p class="detail-subtitle" th:if="${student}">查看学生完整信息</p>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+                <a href="list.html" class="nav-link">
+                    <i class="fas fa-users"></i> 学生列表
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-question-circle"></i> 帮助
+                </a>
             </div>
         </div>
+    </nav>
 
-        <!-- 错误提示 -->
-        <div th:if="${error}" class="alert alert-danger" style="text-align: center; padding: 20px;">
-            <i class="fas fa-exclamation-circle"></i>
-            <span th:text="${error}" style="font-size: 1.05rem;"></span>
-        </div>
-
-        <!-- 学生详情卡片 -->
-        <div th:if="${student}" class="detail-card">
-            <div class="detail-item">
-                    <span class="detail-label">
-                        <i class="fas fa-user"></i> 姓名
-                    </span>
-                <span class="detail-value" th:text="${student.name}"></span>
+    <!-- 主内容区 -->
+    <div class="container">
+        <div class="card decorator">
+            <!-- 详情页头部 -->
+            <div class="detail-header">
+                <div class="detail-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div>
+                    <h1 class="detail-title">张三</h1>
+                    <p class="detail-subtitle">学号：20250001 | 班级：2025级1班</p>
+                </div>
             </div>
-            <div class="detail-item">
-                    <span class="detail-label">
+
+            <!-- 详情内容卡片 -->
+            <div class="detail-card">
+                <div class="detail-item">
+                    <div class="detail-label">
                         <i class="fas fa-calendar-alt"></i> 年龄
-                    </span>
-                <span class="detail-value" th:text="${student.age} + ' 岁'"></span>
-            </div>
-            <div class="detail-item">
-                    <span class="detail-label">
-                        <i class="fas fa-id-card"></i> 学号
-                    </span>
-                <span class="detail-value" th:text="${student.studentNo}"></span>
-            </div>
-            <div class="detail-item">
-                    <span class="detail-label">
-                        <i class="fas fa-school"></i> 班级
-                    </span>
-                <span class="detail-value" th:text="${student.className}"></span>
-            </div>
-            <div class="detail-item">
-                    <span class="detail-label">
-                        <i class="fas fa-hashtag"></i> 系统ID
-                    </span>
-                <span class="detail-value" th:text="${student.id}"></span>
-            </div>
-        </div>
+                    </div>
+                    <div class="detail-value">18 岁</div>
+                </div>
 
-        <!-- 操作按钮 -->
-        <div style="margin-top: 35px; display: flex; gap: 15px; justify-content: center;">
-            <a th:href="@{/students/edit/{id}(id=${student.id})}" th:if="${student}" class="btn btn-primary" style="padding: 10px 30px; font-size: 1rem;">
-                <i class="fas fa-edit mr-2"></i>修改信息
-            </a>
-            <a th:href="@{/students/list}" class="btn btn-secondary" style="padding: 10px 30px; font-size: 1rem;">
-                <i class="fas fa-arrow-left mr-2"></i>返回列表
-            </a>
+                <div class="detail-item">
+                    <div class="detail-label">
+                        <i class="fas fa-phone"></i> 联系电话
+                    </div>
+                    <div class="detail-value">13800138000</div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-label">
+                        <i class="fas fa-envelope"></i> 邮箱（选填）
+                    </div>
+                    <div class="detail-value">zhangsan@example.com</div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-label">
+                        <i class="fas fa-map-marker-alt"></i> 住址（选填）
+                    </div>
+                    <div class="detail-value">北京市海淀区XX街道</div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-label">
+                        <i class="fas fa-comment"></i> 备注信息
+                    </div>
+                    <div class="detail-value">热爱学习，积极参加社团活动，多次获得校级奖学金。</div>
+                </div>
+            </div>
+
+            <!-- 操作按钮组 -->
+            <div style="display: flex; gap: 15px; margin-top: 30px; justify-content: flex-end;">
+                <a href="edit.html" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> 编辑信息
+                </a>
+                <button class="btn btn-danger">
+                    <i class="fas fa-trash"></i> 删除学生
+                </button>
+                <a href="list.html" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> 返回列表
+                </a>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </body>
 </html>
