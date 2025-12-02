@@ -7,71 +7,126 @@
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/common.css">
     <style>
-        /* 核心优化：加宽关键列，调整字体间距 */
+        /* 彻底取消固定布局，让表格自适应宽度 */
         .table {
-            table-layout: fixed;
             width: 100%;
             border-collapse: separate;
-            border-spacing: 0 8px; /* 行间距增大，避免拥挤 */
+            border-spacing: 0 12px; /* 行间距大幅增大，避免上下拥挤 */
+            table-layout: auto !important; /* 取消固定布局，自适应内容宽度 */
         }
+        /* 单元格样式：大幅增大内边距，文字舒展 */
         .table th,
         .table td {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            padding: 16px 20px; /* 增大内边距，提升呼吸感 */
-            font-size: 1rem; /* 统一字体大小 */
-            letter-spacing: 0.5px; /* 增加字间距，更舒展 */
+            white-space: nowrap; /* 强制不换行 */
+            padding: 20px 25px !important; /* 内边距翻倍，左右上下都宽松 */
+            font-size: 1.05rem !important; /* 字体略放大 */
+            letter-spacing: 1px !important; /* 字间距加大，更舒展 */
+            color: #333;
         }
-        /* 加宽关键列：学生姓名/学号/班级 */
-        .table th:nth-child(3), /* 学生姓名列 */
+        /* 表头样式强化，区分度更高 */
+        .table th {
+            background-color: #f0f7ff;
+            font-weight: 600;
+            color: #4a90e2;
+            border-radius: 8px 8px 0 0;
+        }
+        /* 表格行背景，增强呼吸感 */
+        .table tbody tr {
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+        /* 关键列强制加宽，确保不拥挤 */
+        .table th:nth-child(3), /* 学生姓名 */
         .table td:nth-child(3) {
-            min-width: 120px; /* 加宽姓名列 */
+            width: 150px !important; /* 强制加宽姓名列 */
+            text-align: center;
         }
-        .table th:nth-child(4), /* 学号列 */
+        .table th:nth-child(4), /* 学号 */
         .table td:nth-child(4) {
-            min-width: 140px; /* 加宽学号列 */
+            width: 180px !important; /* 强制加宽学号列 */
+            text-align: center;
         }
-        .table th:nth-child(5), /* 班级列 */
+        .table th:nth-child(5), /* 班级 */
         .table td:nth-child(5) {
-            min-width: 100px; /* 加宽班级列 */
+            width: 120px !important; /* 强制加宽班级列 */
+            text-align: center;
         }
-        /* 操作列保持紧凑 */
+        /* 操作列优化，按钮间距增大 */
         .table th:last-child,
         .table td:last-child {
-            min-width: 160px;
+            width: 220px !important;
             text-align: center;
         }
         .operate-btn {
-            margin: 0 5px; /* 增大按钮间距 */
-            padding: 6px 12px;
+            margin: 0 8px !important; /* 按钮间距大幅增大 */
+            padding: 8px 16px !important;
+            font-size: 1rem !important;
         }
-        /* 搜索栏优化：增大输入框内边距 */
+        /* 搜索栏优化：输入框加宽，间距增大 */
+        .search-bar {
+            display: flex;
+            gap: 20px !important; /* 搜索组间距增大 */
+            align-items: center;
+            margin-bottom: 30px !important;
+            flex-wrap: wrap;
+            padding: 10px 0;
+        }
+        .search-group {
+            flex: 1;
+            min-width: 220px !important; /* 搜索框最小宽度加大 */
+        }
+        .form-label {
+            font-size: 1.05rem;
+            margin-bottom: 10px !important;
+        }
         .form-control,
         .search-select {
-            padding: 12px 16px;
-            font-size: 1rem;
-            letter-spacing: 0.3px;
+            padding: 14px 20px !important;
+            font-size: 1.05rem !important;
+            letter-spacing: 0.5px;
+            border-radius: 8px !important;
         }
-        /* 功能按钮区：增大按钮内边距 */
+        /* 功能按钮区：间距增大，更舒展 */
+        .btn-group {
+            display: flex;
+            gap: 15px !important; /* 按钮间距增大 */
+            margin-bottom: 30px !important;
+            flex-wrap: wrap;
+        }
         .btn {
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 12px 24px !important;
+            font-size: 1.05rem !important;
+            border-radius: 8px !important;
         }
-        /* 修复移动端适配 */
-        @media (max-width: 768px) {
-            .table th,
-            .table td {
-                padding: 12px 15px;
-            }
-            .table th:nth-child(3),
-            .table td:nth-child(3) {
-                min-width: 100px;
-            }
-            .table th:nth-child(4),
-            .table td:nth-child(4) {
-                min-width: 120px;
-            }
+        /* 卡片内边距增大，避免内容贴边 */
+        .card {
+            padding: 30px !important;
+            margin-top: 20px;
+            border-radius: 12px !important;
+        }
+        /* 分页间距增大 */
+        .pagination {
+            display: flex;
+            gap: 12px !important;
+            justify-content: center;
+            margin-top: 30px !important;
+        }
+        .page-btn {
+            padding: 8px 16px !important;
+            font-size: 1rem !important;
+        }
+        /* 头像放大，更协调 */
+        .student-avatar {
+            width: 55px !important;
+            height: 55px !important;
+            border: 2px solid #e8f4ff;
+        }
+        /* 序号列居中 */
+        .table th:first-child,
+        .table td:first-child {
+            text-align: center;
+            width: 80px !important;
         }
     </style>
 </head>
@@ -100,10 +155,10 @@
     </div>
 </nav>
 
-<!-- 主要内容区 -->
-<div class="container">
+<!-- 主要内容区：容器加宽，确保表格有足够空间 -->
+<div class="container" style="max-width: 1400px !important; width: 98% !important;">
     <!-- 搜索栏 -->
-    <div class="search-bar" style="margin-bottom: 25px;">
+    <div class="search-bar">
         <div class="search-group">
             <label for="name" class="form-label">
                 <i class="fas fa-user"></i> 学生姓名
@@ -136,7 +191,7 @@
     </div>
 
     <!-- 功能按钮区 -->
-    <div class="btn-group" style="margin-bottom: 25px;">
+    <div class="btn-group">
         <button class="btn btn-primary" id="addStudent">
             <i class="fas fa-plus"></i> 新增学生
         </button>
@@ -152,7 +207,7 @@
     </div>
 
     <!-- 学生表格 -->
-    <div class="card" style="padding: 25px;">
+    <div class="card">
         <table class="table">
             <thead>
             <tr>
@@ -169,7 +224,7 @@
             <tbody>
             <tr>
                 <td>1</td>
-                <td><img src="images/man.png" alt="学生头像" class="student-avatar" style="width: 45px; height: 45px; border-radius: 50%;"></td>
+                <td><img src="images/man.png" alt="学生头像" class="student-avatar"></td>
                 <td>张三</td>
                 <td>2025001</td>
                 <td>1班</td>
@@ -183,7 +238,7 @@
             </tr>
             <tr>
                 <td>2</td>
-                <td><img src="images/woman.png" alt="学生头像" class="student-avatar" style="width: 45px; height: 45px; border-radius: 50%;"></td>
+                <td><img src="images/woman.png" alt="学生头像" class="student-avatar"></td>
                 <td>李四</td>
                 <td>2025002</td>
                 <td>2班</td>
@@ -197,7 +252,7 @@
             </tr>
             <tr>
                 <td>3</td>
-                <td><img src="images/rabbit.png" alt="学生头像" class="student-avatar" style="width: 45px; height: 45px; border-radius: 50%;"></td>
+                <td><img src="images/rabbit.png" alt="学生头像" class="student-avatar"></td>
                 <td>王五</td>
                 <td>2025003</td>
                 <td>3班</td>
@@ -209,12 +264,26 @@
                     <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025003')">删除</button>
                 </td>
             </tr>
+            <tr>
+                <td>4</td>
+                <td><img src="images/fox.png" alt="学生头像" class="student-avatar"></td>
+                <td>赵六</td>
+                <td>2025004</td>
+                <td>1班</td>
+                <td>女</td>
+                <td>18</td>
+                <td>
+                    <button class="btn btn-sm btn-primary operate-btn" onclick="toDetail('2025004')">查看</button>
+                    <button class="btn btn-sm btn-secondary operate-btn" onclick="toEdit('2025004')">编辑</button>
+                    <button class="btn btn-sm btn-danger operate-btn" onclick="toDelete('2025004')">删除</button>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
 
     <!-- 分页 -->
-    <div class="pagination" style="display: flex; gap: 10px; justify-content: center; margin-top: 25px;">
+    <div class="pagination">
         <button class="btn btn-sm btn-secondary page-btn">上一页</button>
         <button class="btn btn-sm btn-primary page-btn active">1</button>
         <button class="btn btn-sm btn-secondary page-btn">2</button>
