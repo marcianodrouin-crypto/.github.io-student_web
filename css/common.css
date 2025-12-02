@@ -7,30 +7,33 @@
 }
 
 body {
-    background-color: #F8F9FA;
+    background-color: #ecf5ff;
     color: #333;
     line-height: 1.6;
     padding-bottom: 60px;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23E8F4FF' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d9ecff' fill-opacity='0.5' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 60px 60px;
+    background-attachment: fixed;
 }
 
 /* 容器样式 */
 .container {
-    width: 92%;
+    width: 94%;
     max-width: 1300px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 20px;
 }
 
-/* 导航栏样式 - 卡通柔和风 */
+/* 导航栏样式 - 保留原功能结构 */
 .navbar {
     background-color: rgba(255, 255, 255, 0.98);
-    border-bottom: 1px solid #E8F4FF;
+    border-bottom: 1px solid #d9ecff;
     position: sticky;
     top: 0;
     z-index: 100;
     padding: 12px 0;
-    box-shadow: 0 2px 10px rgba(74, 144, 226, 0.08);
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.12);
 }
 
 .navbar-container {
@@ -42,7 +45,7 @@ body {
 .logo {
     display: flex;
     align-items: center;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #4A90E2;
     text-decoration: none;
@@ -50,19 +53,19 @@ body {
 }
 
 .logo i {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     color: #FF7E95;
 }
 
 .nav-links {
     display: flex;
-    gap: 35px;
+    gap: 30px;
 }
 
 .nav-link {
     color: #555;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
     transition: all 0.3s ease;
     position: relative;
@@ -72,7 +75,7 @@ body {
 }
 
 .nav-link i {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #4A90E2;
 }
 
@@ -82,29 +85,29 @@ body {
     bottom: -6px;
     left: 0;
     width: 0;
-    height: 3px;
+    height: 2.5px;
     background-color: #FF7E95;
     border-radius: 3px;
     transition: width 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #4A90E2;
+    color: #3A80D2;
 }
 
 .nav-link:hover::after {
     width: 100%;
 }
 
-/* 按钮样式 - 卡通圆角 */
+/* 按钮样式 - 保留原功能类名（对接后端用） */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    padding: 9px 18px;
-    border-radius: 25px;
-    font-size: 0.95rem;
+    padding: 8px 16px;
+    border-radius: 22px;
+    font-size: 0.9rem;
     font-weight: 500;
     text-align: center;
     text-decoration: none;
@@ -112,12 +115,12 @@ body {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     border: none;
     outline: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 6px rgba(74, 144, 226, 0.08);
 }
 
 .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
 }
 
 .btn-primary {
@@ -132,7 +135,7 @@ body {
 .btn-secondary {
     background-color: #F0F7FF;
     color: #4A90E2;
-    border: 1px solid #E8F4FF;
+    border: 1px solid #d9ecff;
 }
 
 .btn-secondary:hover {
@@ -153,15 +156,15 @@ body {
     font-size: 0.85rem;
 }
 
-/* 表单样式 - 柔和圆角 */
+/* 表单样式 - 保留原类名（对接后端用） */
 .form-group {
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
 .form-label {
     display: block;
-    margin-bottom: 9px;
-    font-size: 0.95rem;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
     color: #555;
     display: flex;
     align-items: center;
@@ -174,13 +177,13 @@ body {
 
 .form-control {
     width: 100%;
-    padding: 11px 16px;
-    border: 1px solid #E8F4FF;
-    border-radius: 12px;
-    font-size: 1rem;
+    padding: 10px 15px;
+    border: 1px solid #d9ecff;
+    border-radius: 10px;
+    font-size: 0.95rem;
     transition: all 0.3s ease;
     background-color: white;
-    box-shadow: inset 0 2px 3px rgba(74, 144, 226, 0.05);
+    box-shadow: inset 0 2px 4px rgba(74, 144, 226, 0.05);
 }
 
 .form-control:focus {
@@ -190,35 +193,35 @@ body {
     transform: translateY(-1px);
 }
 
-/* 卡片样式 - 卡通阴影 */
+/* 卡片样式 - 保留原类名 */
 .card {
     background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 5px 20px rgba(74, 144, 226, 0.08);
-    padding: 30px;
-    margin-top: 35px;
+    border-radius: 16px;
+    box-shadow: 0 3px 15px rgba(74, 144, 226, 0.1);
+    padding: 25px;
+    margin-top: 30px;
     transition: all 0.3s ease;
-    border: 1px solid #F0F7FF;
+    border: 1px solid #d9ecff;
 }
 
 .card:hover {
-    box-shadow: 0 8px 30px rgba(74, 144, 226, 0.12);
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.15);
     transform: translateY(-2px);
 }
 
-/* 表格样式 - 柔和边框 */
+/* 表格样式 - 保留原类名和结构（对接后端用） */
 .table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .table th,
 .table td {
-    padding: 14px 18px;
+    padding: 12px 16px;
     text-align: left;
-    border-bottom: 1px solid #F0F7FF;
+    border-bottom: 1px solid #d9ecff;
     transition: background-color 0.3s ease;
 }
 
@@ -226,32 +229,32 @@ body {
     font-weight: 600;
     color: #4A90E2;
     background-color: #F8FBFF;
-    border-top: 1px solid #E8F4FF;
+    border-top: 1px solid #d9ecff;
 }
 
 .table th:first-child {
-    border-radius: 12px 0 0 0;
+    border-radius: 10px 0 0 0;
 }
 
 .table th:last-child {
-    border-radius: 0 12px 0 0;
+    border-radius: 0 10px 0 0;
 }
 
 .table tbody tr:hover {
     background-color: #F8FBFF;
-    transform: translateX(2px);
+    transform: translateX(1px);
 }
 
 .table tbody tr:last-child td {
     border-bottom: none;
 }
 
-/* 消息提示样式 - 卡通图标 */
+/* 消息提示样式 - 保留原类名 */
 .alert {
-    padding: 14px 18px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-    font-size: 0.95rem;
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -259,7 +262,7 @@ body {
 }
 
 .alert i {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .alert-success {
@@ -274,28 +277,28 @@ body {
     border-color: #FFE0E8;
 }
 
-/* 查询栏样式 - 灵活布局 */
+/* 查询栏样式 - 保留原功能结构（对接后端用） */
 .search-bar {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     flex-wrap: wrap;
 }
 
 .search-group {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
     flex: 1;
-    min-width: 280px;
+    min-width: 250px;
 }
 
 .search-select {
-    padding: 10px 14px;
-    border: 1px solid #E8F4FF;
-    border-radius: 12px;
-    font-size: 0.95rem;
+    padding: 9px 12px;
+    border: 1px solid #d9ecff;
+    border-radius: 10px;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
     background-color: white;
     box-shadow: inset 0 2px 3px rgba(74, 144, 226, 0.05);
@@ -306,59 +309,59 @@ body {
     outline: none;
 }
 
-/* 详情页样式 */
+/* 详情页样式 - 保留原类名（后续扩展用） */
 .detail-header {
     display: flex;
     align-items: center;
-    margin-bottom: 35px;
-    border-bottom: 1px solid #F0F7FF;
-    padding-bottom: 25px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #d9ecff;
+    padding-bottom: 20px;
     gap: 15px;
 }
 
 .detail-avatar {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     background-color: #E8F4FF;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px solid #F0F7FF;
-    box-shadow: 0 3px 10px rgba(74, 144, 226, 0.1);
+    border: 2px solid #d9ecff;
+    box-shadow: 0 3px 8px rgba(74, 144, 226, 0.1);
 }
 
 .detail-avatar i {
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: #4A90E2;
 }
 
 .detail-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #333;
     margin: 0;
 }
 
 .detail-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #777;
     margin-top: 5px;
 }
 
 .detail-card {
     background-color: #F8FBFF;
-    border-radius: 18px;
-    padding: 30px;
-    margin-top: 25px;
-    border: 1px solid #E8F4FF;
+    border-radius: 14px;
+    padding: 25px;
+    margin-top: 20px;
+    border: 1px solid #d9ecff;
 }
 
 .detail-item {
     display: flex;
-    margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #E8F4FF;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #d9ecff;
 }
 
 .detail-item:last-child {
@@ -368,10 +371,10 @@ body {
 }
 
 .detail-label {
-    width: 120px;
+    width: 110px;
     font-weight: 600;
     color: #555;
-    font-size: 1.05rem;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -379,16 +382,16 @@ body {
 
 .detail-label i {
     color: #FF7E95;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .detail-value {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #333;
     padding-top: 2px;
 }
 
-/* 动漫卡通装饰元素 */
+/* 装饰元素 - 保留原样式 */
 .decorator {
     position: relative;
 }
@@ -396,31 +399,31 @@ body {
 .decorator::before {
     content: "";
     position: absolute;
-    top: -15px;
+    top: -12px;
     left: 20px;
-    width: 30px;
-    height: 8px;
+    width: 25px;
+    height: 6px;
     background-color: #FFD166;
-    border-radius: 4px;
+    border-radius: 3px;
     box-shadow: 0 2px 3px rgba(255, 209, 102, 0.3);
 }
 
 .decorator::after {
     content: "";
     position: absolute;
-    top: -12px;
+    top: -10px;
     right: 40px;
-    width: 15px;
-    height: 15px;
+    width: 12px;
+    height: 12px;
     background-color: #FF7E95;
     border-radius: 50%;
     box-shadow: 0 2px 3px rgba(255, 126, 149, 0.3);
 }
 
-/* 响应式调整 */
+/* 响应式调整 - 保留原适配逻辑 */
 @media (max-width: 768px) {
     .nav-links {
-        gap: 20px;
+        gap: 15px;
     }
 
     .search-bar {
@@ -433,11 +436,41 @@ body {
     }
 
     .detail-label {
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
 
     .detail-title {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
+    }
+
+    body {
+        background-size: 45px 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .detail-avatar {
+        width: 55px;
+        height: 55px;
+    }
+
+    .detail-avatar i {
+        font-size: 2rem;
     }
 }
 
@@ -446,10 +479,10 @@ html {
     scroll-behavior: smooth;
 }
 
-/* 加载动画（卡通风格） */
+/* 加载动画 - 保留原样式 */
 .loader {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     border: 3px solid #E8F4FF;
     border-top: 3px solid #4A90E2;
     border-radius: 50%;
@@ -462,26 +495,33 @@ html {
     100% { transform: rotate(360deg); }
 }
 
-/* 空数据提示（卡通风格） */
+/* 空数据提示 - 保留原样式 */
 .empty-state {
     text-align: center;
-    padding: 50px 20px;
+    padding: 40px 20px;
     color: #777;
 }
 
 .empty-state i {
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: #E8F4FF;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     transition: all 0.3s ease;
 }
 
 .empty-state:hover i {
     color: #4A90E2;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .empty-state p {
-    font-size: 1.1rem;
-    margin-bottom: 25px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* 首页背景兼容 - 保留原逻辑 */
+body.home-bg,
+body.login-bg {
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
 }
