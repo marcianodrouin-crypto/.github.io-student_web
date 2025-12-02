@@ -2,399 +2,362 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <!-- 关键：手机端自动适配（必须加！） -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>爱鲲学院学生管理系统</title>
-    <link rel="stylesheet" href="css/common.css">
+    <title>爱鲲学院 - 学生管理界面</title>
+    <!-- 引入FontAwesome图标（和首页一致） -->
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .home-bg {
-            background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
-                              url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23E8F4FF' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-            padding-bottom: 60px;
-        }
-
-        /* 头部区域 - 移动端适配 */
-        .home-header {
-            padding: 40px 0 30px;
-            text-align: center;
-            position: relative;
-        }
-
-        .home-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #4A90E2;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 5px rgba(74, 144, 226, 0.1);
-            display: inline-block;
-        }
-
-        .home-subtitle {
-            font-size: 1rem;
-            color: #666;
-            max-width: 100%;
-            margin: 0 auto 25px;
-            line-height: 1.6;
-            padding: 0 10px;
-        }
-
-        .auth-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 40px;
-            padding: 0 20px;
-        }
-
-        .auth-btn {
-            padding: 10px 25px;
-            font-size: 1rem;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            flex: 1;
-        }
-
-        /* 滚动弹出元素样式 */
-        .scroll-section {
-            padding: 40px 0;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .scroll-section.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-title {
-            font-size: 1.6rem;
-            font-weight: 700;
+        /* 全局样式：适配页面背景 #ecf5ff */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ecf5ff;
+            font-family: "Microsoft YaHei", sans-serif;
             color: #333;
-            margin-bottom: 25px;
-            text-align: center;
+        }
+
+        /* 顶部导航栏：自适应 */
+        .navbar {
+            background-color: #4A90E2;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
+        }
+
+        .navbar-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .navbar-user {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            gap: 0.5rem;
         }
 
-        .section-title i {
-            color: #FF7E95;
-            font-size: 1.8rem;
+        /* 容器：自适应宽度，居中显示 */
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
         }
 
-        /* 插图容器 - 移动端适配 */
-        .illustration-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-
-        .illustration-item {
-            text-align: center;
-            max-width: 140px;
-            transition: all 0.5s ease;
-        }
-
-        .illustration-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 15px;
-            background-color: #F8FBFF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 10px;
-            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.1);
-            border: 2px solid #E8F4FF;
-        }
-
-        /* 内嵌SVG图标（替代外部图片，100%显示） */
-        .svg-icon {
-            width: 80px;
-            height: 80px;
-        }
-
-        .illustration-text {
-            font-size: 0.9rem;
-            color: #555;
-            font-weight: 500;
-        }
-
-        /* 特色功能区 - 移动端适配 */
-        .features-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .feature-card {
+        /* 搜索栏：自适应布局 */
+        .search-bar {
             background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(74, 144, 226, 0.08);
-            padding: 15px;
-            transition: all 0.3s ease;
-            border: 1px solid #F0F7FF;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(74, 144, 226, 0.1);
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
         }
 
-        .feature-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
+        .search-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            min-width: 150px; /* 手机端最小宽度，避免挤在一起 */
         }
 
-        .feature-desc {
+        .search-item label {
             color: #666;
-            line-height: 1.5;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
-        /* 底部区域 - 移动端适配 */
-        .home-footer {
-            background-color: rgba(74, 144, 226, 0.05);
-            padding: 20px 0;
+        .search-item input, .search-item select {
+            padding: 0.5rem;
+            border: 1px solid #d9ecff;
+            border-radius: 6px;
+            flex: 1;
+            font-size: 0.9rem;
+            background-color: #f8fbff;
+        }
+
+        .search-btn {
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .search-btn:hover {
+            background-color: #357abd;
+        }
+
+        /* 功能按钮区：自适应 */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .func-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .add-btn {
+            background-color: #67C23A;
+            color: white;
+        }
+
+        .edit-btn {
+            background-color: #FF9F43;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #F56C6C;
+            color: white;
+        }
+
+        .export-btn {
+            background-color: #909399;
+            color: white;
+        }
+
+        /* 学生表格：核心自适应样式 */
+        .student-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(74, 144, 226, 0.1);
+        }
+
+        .student-table th, .student-table td {
+            padding: 0.8rem 0.5rem; /* 相对内边距 */
             text-align: center;
-            margin-top: 40px;
+            font-size: 0.9rem; /* 适配手机的字号 */
+            border-bottom: 1px solid #f0f7ff;
         }
 
-        .footer-text {
-            color: #777;
-            font-size: 0.85rem;
+        .student-table th {
+            background-color: #f5faff;
+            color: #4A90E2;
+            font-weight: 600;
         }
 
-        /* 向下滚动提示 - 移动端适配 */
-        .home-header div {
-            margin-top: 30px !important;
+        .student-table tr:hover {
+            background-color: #f8fbff;
         }
 
-        .home-header div i {
-            font-size: 1.2rem !important;
+        /* 图片样式：确保显示且自适应 */
+        .student-avatar {
+            width: 40px; /* 固定小尺寸，避免手机端溢出 */
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #d9ecff;
         }
 
-        /* 响应式调整（覆盖原有） */
+        /* 操作按钮：手机端适配 */
+        .operate-btn {
+            padding: 0.3rem 0.6rem;
+            margin: 0 0.2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        /* 分页：自适应居中 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #d9ecff;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .page-btn.active {
+            background-color: #4A90E2;
+            color: white;
+            border-color: #4A90E2;
+        }
+
+        /* 响应式：手机端优化（屏幕<768px生效） */
         @media (max-width: 768px) {
-            .home-title {
-                font-size: 1.8rem;
+            /* 隐藏非必要列（比如序号、班级），优先显示核心信息 */
+            .student-table .hide-on-mobile {
+                display: none;
             }
 
-            .features-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .home-title {
-                font-size: 1.6rem;
+            /* 表格单元格内边距缩小，适配小屏幕 */
+            .student-table th, .student-table td {
+                padding: 0.6rem 0.3rem;
+                font-size: 0.8rem;
             }
 
-            .auth-buttons {
+            /* 操作按钮改为垂直排列，避免横向溢出 */
+            .operate-group {
+                display: flex;
                 flex-direction: column;
-                gap: 10px;
+                gap: 0.3rem;
             }
 
-            .auth-btn {
-                width: 100%;
+            /* 导航栏标题缩小 */
+            .navbar-title {
+                font-size: 1rem;
             }
-        }
-
-        /* 弹跳动画 */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-15px); }
-            60% { transform: translateY(-8px); }
         }
     </style>
 </head>
-<body class="home-bg">
-<header class="home-header">
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <div class="navbar-title">
+            <i class="fas fa-graduation-cap mr-2"></i>爱鲲学院学生管理系统
+        </div>
+        <div class="navbar-user">
+            <i class="fas fa-user-circle"></i>
+            <span>管理员</span>
+        </div>
+    </nav>
+
+    <!-- 主要内容区 -->
     <div class="container">
-        <h1 class="home-title">爱鲲学院学生管理系统</h1>
-        <p class="home-subtitle">
-            专为学院打造的高效、便捷、可爱的学生管理平台，涵盖学生信息管理、查询统计等功能，让管理更轻松！
-        </p>
-        <div class="auth-buttons">
-            <a href="login.html" class="btn auth-btn login-btn">
-                <i class="fas fa-sign-in-alt mr-2"></i>登录系统
-            </a>
-            <button class="btn auth-btn register-btn">
-                <i class="fas fa-user-plus mr-2"></i>注册账号
+        <!-- 搜索栏 -->
+        <div class="search-bar">
+            <div class="search-item">
+                <label for="name">学生姓名：</label>
+                <input type="text" id="name" placeholder="请输入姓名">
+            </div>
+            <div class="search-item">
+                <label for="studentId">学号：</label>
+                <input type="text" id="studentId" placeholder="请输入学号">
+            </div>
+            <div class="search-item">
+                <label for="class">班级：</label>
+                <select id="class">
+                    <option value="">全部班级</option>
+                    <option value="1班">1班</option>
+                    <option value="2班">2班</option>
+                    <option value="3班">3班</option>
+                </select>
+            </div>
+            <button class="search-btn">
+                <i class="fas fa-search mr-1"></i>搜索
             </button>
         </div>
 
-        <div style="text-align: center; margin-top: 80px;">
-            <i class="fas fa-chevron-down" style="color: #4A90E2; font-size: 1.5rem; animation: bounce 2s infinite;"></i>
+        <!-- 功能按钮区 -->
+        <div class="btn-group">
+            <button class="func-btn add-btn">
+                <i class="fas fa-plus mr-1"></i>新增学生
+            </button>
+            <button class="func-btn edit-btn">
+                <i class="fas fa-edit mr-1"></i>编辑信息
+            </button>
+            <button class="func-btn delete-btn">
+                <i class="fas fa-trash mr-1"></i>删除学生
+            </button>
+            <button class="func-btn export-btn">
+                <i class="fas fa-download mr-1"></i>导出数据
+            </button>
+        </div>
+
+        <!-- 学生表格 -->
+        <table class="student-table">
+            <thead>
+                <tr>
+                    <th class="hide-on-mobile">序号</th>
+                    <th>头像</th>
+                    <th>学生姓名</th>
+                    <th>学号</th>
+                    <th class="hide-on-mobile">班级</th>
+                    <th>性别</th>
+                    <th class="hide-on-mobile">年龄</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 表格数据行：图片用国内CDN，确保显示 -->
+                <tr>
+                    <td class="hide-on-mobile">1</td>
+                    <td><img src="https://cdn.staticaly.com/gh/liyupi/pic-lib/blob/main/img/cartoon-student-1.png" alt="学生头像" class="student-avatar"></td>
+                    <td>张三</td>
+                    <td>2025001</td>
+                    <td class="hide-on-mobile">1班</td>
+                    <td>男</td>
+                    <td class="hide-on-mobile">18</td>
+                    <td class="operate-group">
+                        <button class="operate-btn edit-btn">编辑</button>
+                        <button class="operate-btn delete-btn">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="hide-on-mobile">2</td>
+                    <td><img src="https://cdn.staticaly.com/gh/liyupi/pic-lib/blob/main/img/cartoon-student-2.png" alt="学生头像" class="student-avatar"></td>
+                    <td>李四</td>
+                    <td>2025002</td>
+                    <td class="hide-on-mobile">2班</td>
+                    <td>女</td>
+                    <td class="hide-on-mobile">17</td>
+                    <td class="operate-group">
+                        <button class="operate-btn edit-btn">编辑</button>
+                        <button class="operate-btn delete-btn">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="hide-on-mobile">3</td>
+                    <td><img src="https://cdn.staticaly.com/gh/liyupi/pic-lib/blob/main/img/cartoon-animal-rabbit.png" alt="学生头像" class="student-avatar"></td>
+                    <td>王五</td>
+                    <td>2025003</td>
+                    <td class="hide-on-mobile">3班</td>
+                    <td>男</td>
+                    <td class="hide-on-mobile">18</td>
+                    <td class="operate-group">
+                        <button class="operate-btn edit-btn">编辑</button>
+                        <button class="operate-btn delete-btn">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 分页 -->
+        <div class="pagination">
+            <button class="page-btn">上一页</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">下一页</button>
         </div>
     </div>
-</header>
 
-<section class="scroll-section">
-    <div class="section-container">
-        <h2 class="section-title">
-            <i class="fas fa-graduation-cap"></i> 校园风采
-        </h2>
-        <div class="illustration-container">
-            <!-- 内嵌SVG：专注学习的同学 -->
-            <div class="illustration-item">
-                <div class="illustration-img">
-                    <svg class="svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M50 20C38.954 20 30 28.954 30 40V70C30 81.046 38.954 90 50 90C61.046 90 70 81.046 70 70V40C70 28.954 61.046 20 50 20Z" fill="#FFD6E0"/>
-                        <path d="M50 10C35.147 10 23 22.147 23 37V70C23 84.853 35.147 97 50 97C64.853 97 77 84.853 77 70V37C77 22.147 64.853 10 50 10Z" fill="#FF9DB0"/>
-                        <path d="M40 35C40 32.2386 42.2386 30 45 30H55C57.7614 30 60 32.2386 60 35V45C60 47.7614 57.7614 50 55 50H45C42.2386 50 40 47.7614 40 45V35Z" fill="#FFFFFF"/>
-                        <path d="M43 33H57V43H43V33Z" fill="#FFB6C1"/>
-                        <path d="M40 55H60V65H40V55Z" fill="#FFE6EC"/>
-                    </svg>
-                </div>
-                <p class="illustration-text">专注学习的同学</p>
-            </div>
-
-            <!-- 内嵌SVG：温馨的师生互动 -->
-            <div class="illustration-item">
-                <div class="illustration-img">
-                    <svg class="svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M30 30C21.7157 30 15 36.7157 15 45V75C15 83.2843 21.7157 90 30 90C38.2843 90 45 83.2843 45 75V45C45 36.7157 38.2843 30 30 30Z" fill="#BDE0FE"/>
-                        <path d="M70 30C61.7157 30 55 36.7157 55 45V75C55 83.2843 61.7157 90 70 90C78.2843 90 85 83.2843 85 75V45C85 36.7157 78.2843 30 70 30Z" fill="#FFD6E0"/>
-                        <path d="M25 40H35V50H25V40Z" fill="#FFFFFF"/>
-                        <path d="M65 40H75V50H65V40Z" fill="#FFFFFF"/>
-                        <path d="M30 60H40V70H20V60H30Z" fill="#E6F7FF"/>
-                        <path d="M60 60H70V70H50V60H60Z" fill="#FFE6EC"/>
-                        <path d="M40 50H60V60H40V50Z" fill="#F0F9FF" stroke="#4A90E2" stroke-width="2"/>
-                    </svg>
-                </div>
-                <p class="illustration-text">温馨的师生互动</p>
-            </div>
-
-            <!-- 内嵌SVG：可爱的校园元素 -->
-            <div class="illustration-item">
-                <div class="illustration-img">
-                    <svg class="svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M50 20C35.147 20 23 32.147 23 47V70C23 84.853 35.147 97 50 97C64.853 97 77 84.853 77 70V47C77 32.147 64.853 20 50 20Z" fill="#FFFACD"/>
-                        <path d="M50 15C33.4315 15 20 28.4315 20 45V75C20 91.5685 33.4315 105 50 105C66.5685 105 80 91.5685 80 75V45C80 28.4315 66.5685 15 50 15Z" fill="#FFE4B5"/>
-                        <path d="M40 35C40 32.2386 42.2386 30 45 30H55C57.7614 30 60 32.2386 60 35V45C60 47.7614 57.7614 50 55 50H45C42.2386 50 40 47.7614 40 45V35Z" fill="#FFFFFF"/>
-                        <path d="M43 33H57V43H43V33Z" fill="#FFD700"/>
-                        <path d="M35 60H65V70H35V60Z" fill="#FFF8DC"/>
-                        <path d="M25 50H35V60H25V50Z" fill="#FFD700" opacity="0.5"/>
-                        <path d="M65 50H75V60H65V50Z" fill="#FFD700" opacity="0.5"/>
-                    </svg>
-                </div>
-                <p class="illustration-text">可爱的校园元素</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="scroll-section">
-    <div class="section-container">
-        <h2 class="section-title">
-            <i class="fas fa-cog"></i> 核心功能
-        </h2>
-        <div class="features-container">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h3 class="feature-title">学生信息管理</h3>
-                <p class="feature-desc">一站式管理学生基本信息，支持新增、修改、删除、查询，操作简单便捷。</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-search"></i>
-                </div>
-                <h3 class="feature-title">多维度精准查询</h3>
-                <p class="feature-desc">支持按姓名、学号、班级等多维度查询，快速定位目标学生。</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-chart-bar"></i>
-                </div>
-                <h3 class="feature-title">数据统计分析</h3>
-                <p class="feature-desc">自动统计学生人数、班级分布等数据，生成直观图表。</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-hand-pointer"></i>
-                </div>
-                <h3 class="feature-title">便捷操作体验</h3>
-                <p class="feature-desc">界面简洁直观，操作流程清晰，大幅提升管理效率。</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="scroll-section">
-    <div class="section-container">
-        <h2 class="section-title">
-            <i class="fas fa-palette"></i> 可爱元素
-        </h2>
-        <div class="illustration-container">
-            <!-- 内嵌SVG：知识的狐狸 -->
-            <div class="illustration-item">
-                <div class="illustration-img">
-                    <svg class="svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M50 20C38.954 20 30 28.954 30 40V70C30 81.046 38.954 90 50 90C61.046 90 70 81.046 70 70V40C70 28.954 61.046 20 50 20Z" fill="#FFC0CB"/>
-                        <path d="M50 15C35.147 15 23 27.147 23 42V75C23 89.853 35.147 102 50 102C64.853 102 77 89.853 77 75V42C77 27.147 64.853 15 50 15Z" fill="#FF69B4"/>
-                        <path d="M40 35C40 32.2386 42.2386 30 45 30H55C57.7614 30 60 32.2386 60 35V45C60 47.7614 57.7614 50 55 50H45C42.2386 50 40 47.7614 40 45V35Z" fill="#FFFFFF"/>
-                        <path d="M43 33H57V43H43V33Z" fill="#FFB6C1"/>
-                        <path d="M35 55H65V65H35V55Z" fill="#FFE6EC"/>
-                        <path d="M25 45H35V55H25V45Z" fill="#FF69B4" opacity="0.5"/>
-                        <path d="M65 45H75V55H65V45Z" fill="#FF69B4" opacity="0.5"/>
-                    </svg>
-                </div>
-                <p class="illustration-text">知识的狐狸</p>
-            </div>
-
-            <!-- 内嵌SVG：智慧的海豚 -->
-            <div class="illustration-item">
-                <div class="illustration-img">
-                    <svg class="svg-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M70 50C70 60 60 70 50 70C40 70 30 60 30 50C30 40 40 30 50 30C60 30 70 40 70 50Z" fill="#87CEFA"/>
-                        <path d="M75 50C75 62 65 72 55 72C45 72 35 62 35 50C35 38 45 28 55 28C65 28 75 38 75 50Z" fill="#4682B4"/>
-                        <path d="M60 45C60 42.2386 62.2386 40 65 40H75C77.7614 40 80 42.2386 80 45V55C80 57.7614 77.7614 60 75 60H65C62.2386 60 60 57.7614 60 55V45Z" fill="#FFFFFF"/>
-                        <path d="M63 43H77V53H63V43Z" fill="#BDE0FE"/>
-                        <path d="M40 55H50V65H30V55H40Z" fill="#E6F7FF"/>
-                    </svg>
-                </div>
-                <p class="illustration-text">智慧的海豚</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer class="home-footer">
-    <div class="container">
-        <p class="footer-text">© 2025 爱鲲学院学生管理系统 - 版权所有</p>
-    </div>
-</footer>
-
-<script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const scrollSections = document.querySelectorAll('.scroll-section');
-
-        function checkVisibility() {
-            scrollSections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                if (sectionTop < windowHeight - 20) {
-                    section.classList.add('active');
-                }
-            });
-        }
-
-        checkVisibility();
-        window.addEventListener('scroll', checkVisibility);
-    });
-</script>
+    <!-- 引入FontAwesome JS（可选） -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </body>
 </html>
